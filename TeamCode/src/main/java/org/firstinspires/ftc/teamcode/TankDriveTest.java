@@ -48,19 +48,9 @@ public class TankDriveTest extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        // Initialize the hardware variables. Note that the strings used here as parameters
-        // to 'get' must correspond to the names assigned during the robot configuration
-        // step (using the FTC Robot Controller app on the phone).
-        FR  = hardwareMap.get(DcMotorEx.class, "FR");
-        FL = hardwareMap.get(DcMotorEx.class, "FL");
-        BR  = hardwareMap.get(DcMotorEx.class, "BR");
-        BL = hardwareMap.get(DcMotorEx.class, "BL");
+        RobotHardware robot = new RobotHardware(this);
 
-        // get all wheels going the same direction
-        FL.setDirection(DcMotorSimple.Direction.FORWARD);
-        BL.setDirection(DcMotorSimple.Direction.FORWARD);
-        FR.setDirection(DcMotorSimple.Direction.REVERSE);
-        BR.setDirection(DcMotorSimple.Direction.REVERSE);
+        robot.Initialize();
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();

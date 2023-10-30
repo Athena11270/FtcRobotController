@@ -13,6 +13,8 @@ public class RobotHardware
     private DcMotorEx FR = null;
     private DcMotorEx BR = null;
 
+    public double speedMultiplier = 0.5;
+
     private LinearOpMode OpModeReference = null;
 
     public RobotHardware(LinearOpMode opModeReference)
@@ -32,13 +34,13 @@ public class RobotHardware
         BR.setDirection(DcMotor.Direction.FORWARD);
     }
 
-    public void MecanumDrive() {
+    public void RunMecanumDrive() {
         double max;
 
         // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-        double axial   = -OpModeReference.gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-        double lateral =  OpModeReference.gamepad1.left_stick_x;
-        double yaw     =  OpModeReference.gamepad1.right_stick_x;
+        double axial   = -OpModeReference.gamepad1.left_stick_y * speedMultiplier;  // Note: pushing stick forward gives negative value
+        double lateral =  OpModeReference.gamepad1.left_stick_x * speedMultiplier;
+        double yaw     =  OpModeReference.gamepad1.right_stick_x * speedMultiplier;
 
         // Combine the joystick requests for each axis-motion to determine each wheel's power.
         // Set up a variable for each drive wheel to save the power level for telemetry.
