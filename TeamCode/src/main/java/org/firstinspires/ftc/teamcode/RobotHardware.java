@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class RobotHardware
 {
     private DcMotorEx FL = null;
@@ -13,9 +13,20 @@ public class RobotHardware
     private DcMotorEx FR = null;
     private DcMotorEx BR = null;
 
-    public double speedMultiplier = 0.5;
+    public double TurboBoost = 0.3;
+
+
+
 
     private LinearOpMode OpModeReference = null;
+
+    private boolean triggerPressed;
+    private boolean MainStickLeft = true;
+
+    double axial;
+    double lateral;
+    double yaw;
+
 
     public RobotHardware(LinearOpMode opModeReference)
     {
@@ -37,10 +48,40 @@ public class RobotHardware
     public void RunMecanumDrive() {
         double max;
 
-        // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-        double axial   = -OpModeReference.gamepad1.left_stick_y * speedMultiplier;  // Note: pushing stick forward gives negative value
-        double lateral =  OpModeReference.gamepad1.left_stick_x * speedMultiplier;
-        double yaw     =  OpModeReference.gamepad1.right_stick_x * speedMultiplier;
+        triggerPressed = OpModeReference.gamepad1.right_trigger > 0;
+
+        if (triggerPressed)
+        {
+            TurboBoost = .8;
+        }else
+        {
+            TurboBoost = .4;
+        }
+
+
+        if (OpModeReference.gamepad1.dpad_left)
+        {
+            MainStickLeft = true;
+        }else if(OpModeReference.gamepad1.dpad_right)
+        {
+            MainStickLeft = false;
+        }
+
+
+
+        if (MainStickLeft)
+        {
+             axial   = -OpModeReference.gamepad1.left_stick_y * TurboBoost;  // Note: pushing stick forward gives negative value
+             lateral =  OpModeReference.gamepad1.left_stick_x * TurboBoost;//might not work, switch Lefts and Rights to fix
+             yaw     =  OpModeReference.gamepad1.right_stick_x * TurboBoost;
+        }else
+        {
+             axial   = -OpModeReference.gamepad1.right_stick_y * TurboBoost;  // Note: pushing stick forward gives negative value
+             lateral =  OpModeReference.gamepad1.right_stick_x * TurboBoost;//might not work, switch Lefts and Rights to fix
+             yaw     =  OpModeReference.gamepad1.left_stick_x * TurboBoost;
+        }
+
+
 
         // Combine the joystick requests for each axis-motion to determine each wheel's power.
         // Set up a variable for each drive wheel to save the power level for telemetry.
