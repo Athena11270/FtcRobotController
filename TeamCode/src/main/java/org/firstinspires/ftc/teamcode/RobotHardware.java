@@ -23,6 +23,11 @@ public class RobotHardware
     private boolean triggerPressed;
     private boolean MainStickLeft = true;
 
+    double DiameterCM = 9.6;
+    double CircumferenceCM = DiameterCM * Math.PI;
+    double TicksPerRev = 384.5;
+    double TicksPerCM = TicksPerRev / CircumferenceCM;
+
     double axial;
     double lateral;
     double yaw;
@@ -43,6 +48,55 @@ public class RobotHardware
         BL.setDirection(DcMotor.Direction.REVERSE);
         FR.setDirection(DcMotor.Direction.FORWARD);
         BR.setDirection(DcMotor.Direction.FORWARD);
+    }
+
+    public void DriveCM(double power, double cm)
+    {
+        // calculate number of ticks we want to move
+        double targetTicks = TicksPerCM * cm;
+
+        // reset encoders to zero
+        FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        // set our target ticks
+        FR.setTargetPosition((int)Math.round(targetTicks));
+        BR.setTargetPosition((int)Math.round(targetTicks));
+        FL.setTargetPosition((int)Math.round(targetTicks));
+        BL.setTargetPosition((int)Math.round(targetTicks));
+
+        // set motor mode to run to position
+        FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        FL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        // turn motors on
+        FR.setPower(power);
+        BR.setPower(power);
+        FL.setPower(power);
+        BL.setPower(power);
+
+        // wait while motors go to where they need to
+        while (FR.isBusy() || BR.isBusy() || FL.isBusy() || BL.isBusy()) {
+            // do nothing
+        }
+
+        // stop motors
+        FR.setPower(0);
+        BR.setPower(0);
+        FL.setPower(0);
+        BL.setPower(0);
+
+        // set mode back to normal
+        FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
     }
 
     public void RunMecanumDrive() {
