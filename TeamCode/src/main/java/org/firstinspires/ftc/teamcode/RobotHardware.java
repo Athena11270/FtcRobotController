@@ -106,19 +106,26 @@ public class RobotHardware
 
         if (triggerPressed)
         {
-            TurboBoost = .8;
+            double rightTrigger = OpModeReference.gamepad1.right_trigger;
+
+            TurboBoost = .4  + rightTrigger ;
+            //OpModeReference.gamepad1.rumble(0.1,0.1,1); //SOME OPTIONAL CHANGES: Varible acelleration with RT, Rumble, Rumble based on RT
+            //OpModeReference.gamepad1.rumble(rightTrigger,rightTrigger,10);
         }else
         {
             TurboBoost = .4;
         }
 
 
-        if (OpModeReference.gamepad1.dpad_left)
+        if (OpModeReference.gamepad1.dpad_right)
         {
-            MainStickLeft = true;
-        }else if(OpModeReference.gamepad1.dpad_right)
-        {
+          if (MainStickLeft){
             MainStickLeft = false;
+          }
+          else if(!MainStickLeft)
+          {
+              MainStickLeft = true;
+          }
         }
 
 
