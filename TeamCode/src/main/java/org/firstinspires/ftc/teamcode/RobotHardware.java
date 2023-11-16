@@ -8,6 +8,10 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class RobotHardware
 {
+    //TODO: Grab necessary code from TestTensorFlow1 or TestTensorFlowEasy1
+    //TODO: Add camera init stuff to our initialize method
+    //TODO: In Autonomous program, write code to drive to first aND SECOND POSITION AND TRY TO DETECT PIXEL
+    //todo: WRITE CODE FOR iF IN FIRST POSITION (DRIVE THERE, PLACE) ELSE IF IN SECOND POSITION (DRIVE THERE, PLACE) eLSE ASSUME IT'S IN 3RD POSITION
     private DcMotorEx FL = null;
     private DcMotorEx BL = null;
     private DcMotorEx FR = null;
@@ -48,6 +52,14 @@ public class RobotHardware
         BL.setDirection(DcMotor.Direction.REVERSE);
         FR.setDirection(DcMotor.Direction.FORWARD);
         BR.setDirection(DcMotor.Direction.FORWARD);
+    }
+
+    public void StrafeLeftCM(double power, double cm) {
+        //TODO: write code
+    }
+
+    public void StrafeRightCM(double power, double cm) {
+        //TODO: write code
     }
 
     public void DriveCM(double power, double cm)
