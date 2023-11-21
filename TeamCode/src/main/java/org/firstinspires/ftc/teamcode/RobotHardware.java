@@ -120,9 +120,9 @@ public class RobotHardware
         {
             double rightTrigger = OpModeReference.gamepad1.right_trigger;
 
-            TurboBoost = .4  + rightTrigger ;
+            TurboBoost = .4  + rightTrigger * 0.6 ;
             //OpModeReference.gamepad1.rumble(0.1,0.1,1); //SOME OPTIONAL CHANGES: Varible acelleration with RT, Rumble, Rumble based on RT
-            //OpModeReference.gamepad1.rumble(rightTrigger,rightTrigger,10);
+            OpModeReference.gamepad1.rumble(1,1,100);
         }else
         {
             TurboBoost = .4;
