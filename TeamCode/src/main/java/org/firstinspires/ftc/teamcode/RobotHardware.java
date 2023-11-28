@@ -17,6 +17,8 @@ public class RobotHardware
     private DcMotorEx FR = null;
     private DcMotorEx BR = null;
 
+    private DcMotorEx Arm1 = null;
+
     public double TurboBoost = 0.3;
 
 
@@ -47,6 +49,7 @@ public class RobotHardware
         BL = OpModeReference.hardwareMap.get(DcMotorEx.class, "BL");
         FR = OpModeReference.hardwareMap.get(DcMotorEx.class, "FR");
         BR = OpModeReference.hardwareMap.get(DcMotorEx.class, "BR");
+        Arm1 = OpModeReference.hardwareMap.get(DcMotorEx.class, "Arm1");
 
         FL.setDirection(DcMotor.Direction.REVERSE);
         BL.setDirection(DcMotor.Direction.REVERSE);
@@ -139,8 +142,43 @@ public class RobotHardware
               MainStickLeft = true;
           }
         }
+//// three ideas on how to control the Arm motor ////
 
+// 1 - while loops (will this lag or crash it?)
+        while(OpModeReference.gamepad1.cross){
+            Arm1.setPower(0.3);
+        }
+        while(OpModeReference.gamepad1.circle){
+            Arm1.setPower(-0.3);
+        }
+        if(!OpModeReference.gamepad1.cross && !OpModeReference.gamepad1.circle){
+            Arm1.setPower(0);
+        }
 
+// 2 - pretty much same as above but with IFs instead of WHILEs
+        /*
+        Arm1.setpower(0);
+        if (OpModeReference.gamepad1.cross) {
+            Arm1.setPower(0.3);
+        }
+        else if (OpModeReference.gamepad1.circle) {
+            Arm1.setPower(-0.3);
+        }
+        */
+
+// 3 - possibly overcomplicated nested IF thing.
+        /*
+        if (OpModeReference.gamepad1.cross || OpModeReference.gamepad1.circle) {
+            if(OpModeReference.gamepad1.circle){
+                Arm1.setPower(0.3);
+            }
+            if(OpModeReference.gamepad1.cross){
+                Arm1.setPower(-0.3);
+            }
+        } else {
+            Arm1.setPower(0);
+        }
+            */
 
         if (MainStickLeft)
         {
