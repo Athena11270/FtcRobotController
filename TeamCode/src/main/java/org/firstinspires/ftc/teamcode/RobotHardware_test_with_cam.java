@@ -4,9 +4,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-public class RobotHardware
+public class RobotHardware_test_with_cam
 {
     //TODO: Grab necessary code from TestTensorFlow1 or TestTensorFlowEasy1
     //TODO: Add camera init stuff to our initialize method
@@ -39,8 +40,22 @@ public class RobotHardware
     double lateral;
     double yaw;
 
+    private static final String TFOD_MODEL_ASSET = "MyModelStoredAsAsset.tflite";
+    // TFOD_MODEL_FILE points to a model file stored onboard the Robot Controller's storage,
+    // this is used when uploading models directly to the RC using the model upload interface.
+    private static final String[] LABELS = {
+            "Pixel",
+    };
 
-    public RobotHardware(LinearOpMode opModeReference)
+    private TfodProcessor tfod;
+
+    /**
+     * The variable to store our instance of the vision portal.
+     */
+    private VisionPortal visionPortal;
+
+
+    public RobotHardware_test_with_cam(LinearOpMode opModeReference)
     {
         OpModeReference = opModeReference;
     }

@@ -29,38 +29,60 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-
-@Autonomous(name="Auto Test 2", group="Robot")
-
-public class AutoTest2 extends LinearOpMode {
+import com.qualcomm.robotcore.util.Range;
 
 
+@TeleOp(name="MotorTest", group="I dunno")
+//@Disabled
+public class MotorTest extends LinearOpMode {
+
+    private DcMotorEx FL = null;
+    private DcMotorEx FR = null;
+    private DcMotorEx BR = null;
+    private DcMotorEx BL = null;
+
+    @Override
     public void runOpMode() {
 
-        RobotHardware robot = new RobotHardware(this);
+        FL = hardwareMap.get(DcMotorEx.class, "FL");
+        BL = hardwareMap.get(DcMotorEx.class, "BL");
+        FR = hardwareMap.get(DcMotorEx.class, "FR");
+        BR = hardwareMap.get(DcMotorEx.class, "BR");
+        //Arm1 = OpModeReference.hardwareMap.get(DcMotorEx.class, "Arm1");
 
-        robot.Initialize();
-
+        FL.setDirection(DcMotor.Direction.REVERSE);
+        BL.setDirection(DcMotor.Direction.REVERSE);
+        FR.setDirection(DcMotor.Direction.FORWARD);
+        BR.setDirection(DcMotor.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        // Drive forward 58 cm
-        robot.DriveCM(0.3, 58);
+        // run until the end of the match (driver presses STOP)
+        while (opModeIsActive()) {
+            if (gamepad1.square)
+                FL.setPower(0.5);
+            else
+                FL.setPower(0);
 
-        // Strafe left 50 cm
-        robot.StrafeLeftCM(0.3, 50);
+            if (gamepad1.triangle)
+                FR.setPower(0.5);
+            else
+                FR.setPower(0);
 
-        // strafe right 50 cm
-        robot.StrafeRightCM(0.3, 50);
+            if (gamepad1.cross)
+                BL.setPower(0.5);
+            else
+                BL.setPower(0);
 
-        // drive backward 58 cm
-        robot.DriveCM(-0.3, -58);
+            if (gamepad1.circle)
+                BR.setPower(0.5);
+            else
+                BR.setPower(0);
+        }
     }
-
-
 }
