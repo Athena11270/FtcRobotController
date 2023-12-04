@@ -34,6 +34,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import javax.lang.model.element.VariableElement;
+
 @Autonomous(name="Auto Test 2", group="Robot")
 
 public class AutoTest2 extends LinearOpMode {
@@ -49,17 +51,53 @@ public class AutoTest2 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        // Drive forward 58 cm
-        robot.DriveCM(0.3, 58);
+        // Strafe left 27.94 cm
+        robot.StrafeLeftCM(0.3, 27.94);
 
-        // Strafe left 50 cm
-        robot.StrafeLeftCM(0.3, 50);
+        // add camera detection true/false. if false continue on, if true:
+        //drive forword 45.085 cm
+        //robot.DriveCM(0.3, 45.085);
+        //place pixel
+        // Strafe left 30.48 cm
+        //robot.StrafeLeftCM(0.3, 30.48);
+        // drive forward 106.68 cm
+        //robot.DriveCM(0.3, 106.68);
+        // strafe right 304.8 cm
+        //robot.StrafeRightCM(0.3, 304.8);
+        // drive backward 30.48 cm
+        //robot.DriveCM(-0.3, -30.48);
 
-        // strafe right 50 cm
-        robot.StrafeRightCM(0.3, 50);
+        // strafe right 27.94 cm
+        robot.StrafeRightCM(0.3, 27.94);
 
-        // drive backward 58 cm
-        robot.DriveCM(-0.3, -58);
+        // add camera detection true/false. if false continue on, if true:
+        //drive forword 45.085 cm
+        //robot.DriveCM(0.3, 45.085);
+        //place pixel
+        // Strafe left 60.96 cm
+        //robot.StrafeLeftCM(0.3, 60.96);
+        // drive forward 53.34 cm
+        //robot.DriveCM(0.3, 53.34);
+        // strafe right 304.8 cm
+        //robot.StrafeRightCM(0.3, 304.8);
+        // drive backward 30.48 cm
+        //robot.DriveCM(-0.3, -30.48);
+
+        // strafe right 27.94 cm
+        robot.StrafeRightCM(0.3, 27.94);
+        //drive forword 75.565 cm
+        robot.DriveCM(0.3, 75.565);
+        //place pixel
+        // Strafe left 90 cm
+        //robot.StrafeLeftCM(0.3, 90);
+        // drive forward 106.68 cm
+        //robot.DriveCM(0.3, 106.68);
+        // strafe right 304.8 cm
+        //robot.StrafeRightCM(0.3, 304.8);
+        // drive backward 30.48 cm
+        //robot.DriveCM(-0.3, -30.48);
+
+        // stop
     }
 
 
