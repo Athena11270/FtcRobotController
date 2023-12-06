@@ -56,32 +56,32 @@ public class AutoTest2 extends LinearOpMode {
 
         // add camera detection true/false. if false continue on, if true:
         //drive forword 45.085 cm
-        //robot.DriveCM(0.3, 45.085);
+        robot.DriveCM(0.3, 45.085);
         //place pixel
         // Strafe left 30.48 cm
-        //robot.StrafeLeftCM(0.3, 30.48);
+        robot.StrafeLeftCM(0.3, 30.48);
         // drive forward 106.68 cm
-        //robot.DriveCM(0.3, 106.68);
+        robot.DriveCM(0.3, 106.68);
         // strafe right 304.8 cm
-        //robot.StrafeRightCM(0.3, 304.8);
+        robot.StrafeRightCM(0.3, 304.8);
         // drive backward 30.48 cm
-        //robot.DriveCM(-0.3, -30.48);
+        robot.DriveCM(-0.3, -30.48);
 
         // strafe right 27.94 cm
         robot.StrafeRightCM(0.3, 27.94);
 
         // add camera detection true/false. if false continue on, if true:
         //drive forword 45.085 cm
-        //robot.DriveCM(0.3, 45.085);
+        robot.DriveCM(0.3, 45.085);
         //place pixel
         // Strafe left 60.96 cm
-        //robot.StrafeLeftCM(0.3, 60.96);
+        robot.StrafeLeftCM(0.3, 60.96);
         // drive forward 53.34 cm
-        //robot.DriveCM(0.3, 53.34);
+        robot.DriveCM(0.3, 53.34);
         // strafe right 304.8 cm
-        //robot.StrafeRightCM(0.3, 304.8);
+        robot.StrafeRightCM(0.3, 304.8);
         // drive backward 30.48 cm
-        //robot.DriveCM(-0.3, -30.48);
+        robot.DriveCM(-0.3, -30.48);
 
         // strafe right 27.94 cm
         robot.StrafeRightCM(0.3, 27.94);

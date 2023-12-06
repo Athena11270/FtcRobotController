@@ -86,6 +86,9 @@ public class MecanumDrive extends LinearOpMode
         while (opModeIsActive()) {
 
             robot.RunMecanumDrive();
+            robot.IntakeLiftControl();
+            robot.IntakeSpinControl();
+            robot.ArmControl();
 
         }
     }
