@@ -299,10 +299,10 @@ public class RobotHardware
 
     public void IntakeLiftControl() {
         if (OpModeReference.gamepad1.triangle) {
-            INTAKELIFT.setPower(.6);
+            INTAKELIFT.setPower(.4);
         }
         else if (OpModeReference.gamepad1.square) {
-            INTAKELIFT.setPower(-.6);
+            INTAKELIFT.setPower(-.4);
         }
         else {
             INTAKELIFT.setPower(0);
