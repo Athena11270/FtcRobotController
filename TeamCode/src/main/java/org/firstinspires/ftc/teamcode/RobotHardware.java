@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.print.PrinterInfo;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -54,10 +56,22 @@ public class RobotHardware
         INTAKELIFT = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKELIFT");
         INTAKESPIN = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKESPIN");
 
-        FL.setDirection(DcMotor.Direction.REVERSE);
-        BL.setDirection(DcMotor.Direction.REVERSE);
-        FR.setDirection(DcMotor.Direction.FORWARD);
-        BR.setDirection(DcMotor.Direction.FORWARD);
+        // USUALLY WE DON"T PROGRAM AROUND HARDWARE PROBLEMS BUT FL IS REVERSED POLARITY
+        FL.setDirection(DcMotorEx.Direction.FORWARD);
+        BL.setDirection(DcMotorEx.Direction.REVERSE);
+        FR.setDirection(DcMotorEx.Direction.FORWARD);
+        BR.setDirection(DcMotorEx.Direction.FORWARD);
+
+        FL.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        FR.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        BL.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        BR.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+
+        FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+
     }
 
 
@@ -68,10 +82,10 @@ public class RobotHardware
         double targetTicks = TicksPerCM * cm;
 
         // reset encoders to zero
-        FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
         // set our target ticks
         FR.setTargetPosition((int)Math.round(targetTicks));
@@ -80,10 +94,10 @@ public class RobotHardware
         BL.setTargetPosition((int)Math.round(targetTicks));
 
         // set motor mode to run to position
-        FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        FL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        FR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        FL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
 
         // turn motors on
         FR.setPower(power);
@@ -103,10 +117,10 @@ public class RobotHardware
         BL.setPower(0);
 
         // set mode back to normal
-        FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
 
     }
@@ -117,10 +131,10 @@ public class RobotHardware
         double targetTicks = TicksPerCM * cm;
 
         // reset encoders to zero
-        FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
         // set our target ticks
         FR.setTargetPosition((int)Math.round(targetTicks));
@@ -129,10 +143,10 @@ public class RobotHardware
         BL.setTargetPosition((int)Math.round(targetTicks));
 
         // set motor mode to run to position
-        FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        FL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        FR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        FL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
 
         // turn motors on
         FR.setPower(power);
@@ -152,10 +166,10 @@ public class RobotHardware
         BL.setPower(0);
 
         // set mode back to normal
-        FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void StrafeRightCM(double power, double cm)
@@ -164,10 +178,10 @@ public class RobotHardware
         double targetTicks = TicksPerCM * cm;
 
         // reset encoders to zero
-        FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
         // set our target ticks
         FR.setTargetPosition((int)Math.round(-targetTicks));
@@ -176,16 +190,16 @@ public class RobotHardware
         BL.setTargetPosition((int)Math.round(-targetTicks));
 
         // set motor mode to run to position
-        FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        FL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        FR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        FL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
 
         // turn motors on
         FR.setPower(-power);
         BR.setPower(power);
         FL.setPower(power);
-        BL.setPower(-power);
+        BL.setPower(power);
 
         // wait while motors go to where they need to
         while (FR.isBusy() || BR.isBusy() || FL.isBusy() || BL.isBusy()) {
@@ -199,11 +213,13 @@ public class RobotHardware
         BL.setPower(0);
 
         // set mode back to normal
-        FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+
     }
+
 
     public void RunMecanumDrive() {
         double max;
