@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
+import java.util.Timer;
+
 public class RobotHardware
 {
     //TODO: Grab necessary code from TestTensorFlow1 or TestTensorFlowEasy1
@@ -302,10 +304,10 @@ public class RobotHardware
 
         // press cross to make arm go up
         // press circle to make arm go down
-        if (OpModeReference.gamepad1.cross) {
+        if (OpModeReference.gamepad2.cross) {
             ARM.setPower(0.4);
         }
-        else if (OpModeReference.gamepad1.circle) {
+        else if (OpModeReference.gamepad2.circle) {
             ARM.setPower(-0.4);
         }
         else {
@@ -313,21 +315,48 @@ public class RobotHardware
         }
     }
 
-    public void IntakeLiftControl() {
-        if (OpModeReference.gamepad1.triangle) {
-            INTAKELIFT.setPower(.4);
+    public void TimedLeftMoterStop(long Time) {
+
+
+        try {
+            Thread.sleep(Time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        else if (OpModeReference.gamepad1.square) {
-            INTAKELIFT.setPower(-.4);
+
+        FL.setPower(0);
+    }
+    public void IntakeLiftControl() {
+        if (OpModeReference.gamepad2.triangle) {
+            INTAKELIFT.setPower(.6);
+        }
+        else if (OpModeReference.gamepad2.square) {
+            INTAKELIFT.setPower(-.6);
         }
         else {
             INTAKELIFT.setPower(0);
         }
     }
 
+    public void TimedIntakeLiftControl(long Time) {
+        INTAKELIFT.setPower(.6);
+
+      try {
+          Thread.sleep(Time);
+            }
+              catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+
+        INTAKELIFT.setPower(0);
+
+    }
+
+
     public void IntakeSpinControl() {
         if (OpModeReference.gamepad1.left_bumper) {
-            INTAKESPIN.setPower(1);
+            INTAKESPIN.setPower(.5);
         }
         else if (OpModeReference.gamepad1.right_bumper) {
             INTAKESPIN.setPower(-1);

@@ -32,9 +32,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name="RedF2", group="Robot")
+@Autonomous(name="LowerIntake", group="Robot")
 
-public class RedF2 extends LinearOpMode {
+public class LowerIntake extends LinearOpMode {
 
 
     public void runOpMode() {
@@ -48,19 +48,6 @@ public class RedF2 extends LinearOpMode {
         waitForStart();
 
         robot.TimedIntakeLiftControl(1000);
-
-        // drive forword 12.7 cm
-        robot.DriveCM(0.3, 12.7);
-
-        // strafe right 60.96 cm
-        robot.StrafeRightCM(0.3, 60.96);
-
-        // drive forword 116.84 cm
-        robot.DriveCM(0.3, 116.84);
-
-        // strafe right 182.88 cm
-        robot.StrafeRightCM(0.3, 182.88);
-
 
 
     }

@@ -47,6 +47,8 @@ public class BlueF2 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
+        robot.TimedIntakeLiftControl(1000);
+
         // drive forword 12.7 cm
         robot.DriveCM(0.3, 12.7);
 

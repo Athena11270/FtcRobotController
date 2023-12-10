@@ -29,8 +29,11 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import static com.sun.tools.doclint.HtmlTag.BR;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 @Autonomous(name="RedF4", group="Robot")
 
@@ -47,12 +50,13 @@ public class RedF4 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        // strafe right 106.68 cm
-        robot.StrafeRightCM(0.3, 106.68);
+        robot.TimedIntakeLiftControl(1000);
 
-       
+        robot.TimedLeftMoterStop(3000);
+
+        // strafe right 106.68 cm
+        robot.StrafeRightCM(0.3, 108.68);
+
 
     }
-
-
 }
