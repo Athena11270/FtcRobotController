@@ -52,7 +52,7 @@ public class RedF4 extends LinearOpMode {
 
         robot.TimedIntakeLiftControl(1000);
 
-        robot.TimedLeftMoterStop(3000);
+        //robot.TimedLeftMoterStop(3000);
 
         // strafe right 106.68 cm
         robot.StrafeRightCM(0.3, 108.68);

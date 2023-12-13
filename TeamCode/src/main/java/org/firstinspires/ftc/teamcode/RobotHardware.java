@@ -5,6 +5,7 @@ import android.print.PrinterInfo;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import java.util.Timer;
 
@@ -59,7 +60,7 @@ public class RobotHardware
         INTAKESPIN = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKESPIN");
 
         // USUALLY WE DON"T PROGRAM AROUND HARDWARE PROBLEMS BUT FL IS REVERSED POLARITY
-        FL.setDirection(DcMotorEx.Direction.FORWARD);
+        FL.setDirection(DcMotorEx.Direction.REVERSE);
         BL.setDirection(DcMotorEx.Direction.REVERSE);
         FR.setDirection(DcMotorEx.Direction.FORWARD);
         BR.setDirection(DcMotorEx.Direction.FORWARD);
@@ -69,10 +70,10 @@ public class RobotHardware
         BL.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         BR.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        BL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
     }
 
@@ -119,10 +120,10 @@ public class RobotHardware
         BL.setPower(0);
 
         // set mode back to normal
-        FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        BL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
 
     }
@@ -168,10 +169,10 @@ public class RobotHardware
         BL.setPower(0);
 
         // set mode back to normal
-        FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        BL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
     }
 
     public void StrafeRightCM(double power, double cm)
@@ -215,10 +216,10 @@ public class RobotHardware
         BL.setPower(0);
 
         // set mode back to normal
-        FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        BL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
     }
 
@@ -359,7 +360,7 @@ public class RobotHardware
             INTAKESPIN.setPower(.5);
         }
         else if (OpModeReference.gamepad1.right_bumper) {
-            INTAKESPIN.setPower(-1);
+            INTAKESPIN.setPower(-.8);
         }
         else {
             INTAKESPIN.setPower(0);
