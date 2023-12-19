@@ -199,7 +199,7 @@ public class RobotHardware
         BL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
 
         // turn motors on
-        FR.setPower(-power);
+        FR.setPower(power);
         BR.setPower(power);
         FL.setPower(power);
         BL.setPower(power);
@@ -356,10 +356,10 @@ public class RobotHardware
 
 
     public void IntakeSpinControl() {
-        if (OpModeReference.gamepad1.left_bumper) {
+        if (OpModeReference.gamepad2.left_bumper) {
             INTAKESPIN.setPower(.5);
         }
-        else if (OpModeReference.gamepad1.right_bumper) {
+        else if (OpModeReference.gamepad2.right_bumper) {
             INTAKESPIN.setPower(-.8);
         }
         else {
