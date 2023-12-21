@@ -1,13 +1,21 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.print.PrinterInfo;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-public class RobotHardware_test_with_cam
+import java.util.List;
+import java.util.Timer;
+
+public class ClumpyHardware
 {
     //TODO: Grab necessary code from TestTensorFlow1 or TestTensorFlowEasy1
     //TODO: Add camera init stuff to our initialize method
@@ -19,9 +27,18 @@ public class RobotHardware_test_with_cam
     private DcMotorEx BR = null;
 
     // ARM1 needs a rev expansion hub
-    //private DcMotorEx Arm1 = null;
+
+
+    private WebcamName WEBCAM1 = null;
 
     public double TurboBoost = 0.3;
+
+    // The variable to store our instance of the TensorFlow Object Detection processor.
+    private TfodProcessor tfod;
+
+    // The variable to store our instance of the vision portal.
+    private VisionPortal visionPortal;
+
 
 
 
@@ -40,38 +57,76 @@ public class RobotHardware_test_with_cam
     double lateral;
     double yaw;
 
-    private static final String TFOD_MODEL_ASSET = "MyModelStoredAsAsset.tflite";
-    // TFOD_MODEL_FILE points to a model file stored onboard the Robot Controller's storage,
-    // this is used when uploading models directly to the RC using the model upload interface.
-    private static final String[] LABELS = {
-            "Pixel",
-    };
 
-    private TfodProcessor tfod;
-
-    /**
-     * The variable to store our instance of the vision portal.
-     */
-    private VisionPortal visionPortal;
-
-
-    public RobotHardware_test_with_cam(LinearOpMode opModeReference)
+    public ClumpyHardware(LinearOpMode opModeReference)
     {
         OpModeReference = opModeReference;
     }
 
+    private void initTfod() {
+
+        // Create the TensorFlow processor by using a builder.
+        tfod = new TfodProcessor.Builder().build();
+
+        // Create the vision portal by using a builder.
+        VisionPortal.Builder builder = new VisionPortal.Builder();
+        builder.setCamera(WEBCAM1);
+        builder.enableLiveView(true);
+        builder.setAutoStopLiveView(false);
+
+        // Set and enable the processor.
+        builder.addProcessor(tfod);
+
+        // Build the Vision Portal, using the above settings.
+        visionPortal = builder.build();
+
+    }
     public void Initialize() {
         FL = OpModeReference.hardwareMap.get(DcMotorEx.class, "FL");
         BL = OpModeReference.hardwareMap.get(DcMotorEx.class, "BL");
         FR = OpModeReference.hardwareMap.get(DcMotorEx.class, "FR");
         BR = OpModeReference.hardwareMap.get(DcMotorEx.class, "BR");
-        //Arm1 = OpModeReference.hardwareMap.get(DcMotorEx.class, "Arm1");
 
-        FL.setDirection(DcMotor.Direction.REVERSE);
-        BL.setDirection(DcMotor.Direction.REVERSE);
-        FR.setDirection(DcMotor.Direction.FORWARD);
-        BR.setDirection(DcMotor.Direction.FORWARD);
+        WEBCAM1 = OpModeReference.hardwareMap.get(WebcamName.class, "Webcam 1");
+
+        // USUALLY WE DON"T PROGRAM AROUND HARDWARE PROBLEMS BUT FL IS REVERSED POLARITY
+        FL.setDirection(DcMotorEx.Direction.REVERSE);
+        BL.setDirection(DcMotorEx.Direction.REVERSE);
+        FR.setDirection(DcMotorEx.Direction.FORWARD);
+        BR.setDirection(DcMotorEx.Direction.FORWARD);
+
+        FL.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        FR.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        BL.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        BR.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+
+        FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+
+        initTfod();
+
     }
+
+    public boolean IsPixel() {
+        List<Recognition> currentRecognitions = null;
+        boolean found = false;
+
+        for (int x = 0; x < 100; x ++) {
+            currentRecognitions = tfod.getRecognitions();
+            OpModeReference.sleep(10);
+            if (currentRecognitions.size() > 0)
+            {
+                found = true;
+                break;
+            }
+            OpModeReference.telemetry.addData("loop", x);
+        }
+        return found;
+
+    }
+
 
 
 
@@ -81,10 +136,10 @@ public class RobotHardware_test_with_cam
         double targetTicks = TicksPerCM * cm;
 
         // reset encoders to zero
-        FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
         // set our target ticks
         FR.setTargetPosition((int)Math.round(targetTicks));
@@ -93,10 +148,10 @@ public class RobotHardware_test_with_cam
         BL.setTargetPosition((int)Math.round(targetTicks));
 
         // set motor mode to run to position
-        FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        FL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        FR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        FL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
 
         // turn motors on
         FR.setPower(power);
@@ -116,10 +171,10 @@ public class RobotHardware_test_with_cam
         BL.setPower(0);
 
         // set mode back to normal
-        FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
 
     }
@@ -130,10 +185,10 @@ public class RobotHardware_test_with_cam
         double targetTicks = TicksPerCM * cm;
 
         // reset encoders to zero
-        FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
         // set our target ticks
         FR.setTargetPosition((int)Math.round(targetTicks));
@@ -142,10 +197,10 @@ public class RobotHardware_test_with_cam
         BL.setTargetPosition((int)Math.round(targetTicks));
 
         // set motor mode to run to position
-        FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        FL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        FR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        FL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
 
         // turn motors on
         FR.setPower(power);
@@ -165,10 +220,10 @@ public class RobotHardware_test_with_cam
         BL.setPower(0);
 
         // set mode back to normal
-        FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
     }
 
     public void StrafeRightCM(double power, double cm)
@@ -177,10 +232,10 @@ public class RobotHardware_test_with_cam
         double targetTicks = TicksPerCM * cm;
 
         // reset encoders to zero
-        FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
         // set our target ticks
         FR.setTargetPosition((int)Math.round(-targetTicks));
@@ -189,16 +244,16 @@ public class RobotHardware_test_with_cam
         BL.setTargetPosition((int)Math.round(-targetTicks));
 
         // set motor mode to run to position
-        FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        FL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        FR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        FL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
 
         // turn motors on
-        FR.setPower(-power);
+        FR.setPower(power);
         BR.setPower(power);
         FL.setPower(power);
-        BL.setPower(-power);
+        BL.setPower(power);
 
         // wait while motors go to where they need to
         while (FR.isBusy() || BR.isBusy() || FL.isBusy() || BL.isBusy()) {
@@ -212,11 +267,13 @@ public class RobotHardware_test_with_cam
         BL.setPower(0);
 
         // set mode back to normal
-        FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+
     }
+
 
     public void RunMecanumDrive() {
         double max;
@@ -245,26 +302,26 @@ public class RobotHardware_test_with_cam
         // press dpad right
         if (OpModeReference.gamepad1.dpad_right)
         {
-          if (MainStickLeft){
-            MainStickLeft = false;
-          }
-          else if(!MainStickLeft)
-          {
-              MainStickLeft = true;
-          }
+            if (MainStickLeft){
+                MainStickLeft = false;
+            }
+            else if(!MainStickLeft)
+            {
+                MainStickLeft = true;
+            }
         }
 
 
         if (MainStickLeft)
         {
-             axial   = -OpModeReference.gamepad1.left_stick_y * TurboBoost;  // Note: pushing stick forward gives negative value
-             lateral =  OpModeReference.gamepad1.left_stick_x * TurboBoost;//might not work, switch Lefts and Rights to fix
-             yaw     =  OpModeReference.gamepad1.right_stick_x * TurboBoost;
+            axial   = -OpModeReference.gamepad1.left_stick_y * TurboBoost;  // Note: pushing stick forward gives negative value
+            lateral =  OpModeReference.gamepad1.left_stick_x * TurboBoost;//might not work, switch Lefts and Rights to fix
+            yaw     =  OpModeReference.gamepad1.right_stick_x * TurboBoost;
         }else
         {
-             axial   = -OpModeReference.gamepad1.right_stick_y * TurboBoost;  // Note: pushing stick forward gives negative value
-             lateral =  OpModeReference.gamepad1.right_stick_x * TurboBoost;//might not work, switch Lefts and Rights to fix
-             yaw     =  OpModeReference.gamepad1.left_stick_x * TurboBoost;
+            axial   = -OpModeReference.gamepad1.right_stick_y * TurboBoost;  // Note: pushing stick forward gives negative value
+            lateral =  OpModeReference.gamepad1.right_stick_x * TurboBoost;//might not work, switch Lefts and Rights to fix
+            yaw     =  OpModeReference.gamepad1.left_stick_x * TurboBoost;
         }
 
         // Combine the joystick requests for each axis-motion to determine each wheel's power.
@@ -295,20 +352,17 @@ public class RobotHardware_test_with_cam
         BR.setPower(rightBackPower);
     }
 
-//    public void ArmControl() {
-//
-//        // press cross to make arm go up
-//        // press circle to make arm go down
-//        if (OpModeReference.gamepad1.cross) {
-//            Arm1.setPower(0.3);
-//        }
-//        else if (OpModeReference.gamepad1.circle) {
-//            Arm1.setPower(-0.3);
-//        }
-//        else {
-//            Arm1.setPower(0);
-//        }
-//    }
 
 
+    public void TimedLeftMoterStop(long Time) {
+
+
+        try {
+            Thread.sleep(Time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        FL.setPower(0);
+    }
 }

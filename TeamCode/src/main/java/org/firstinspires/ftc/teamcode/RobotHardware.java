@@ -7,6 +7,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.tfod.TfodProcessor;
+
+import java.util.List;
 import java.util.Timer;
 
 public class RobotHardware
@@ -25,7 +31,16 @@ public class RobotHardware
     private DcMotorEx INTAKESPIN = null;
     private DcMotorEx INTAKELIFT = null;
 
+    private WebcamName WEBCAM1 = null;
+
     public double TurboBoost = 0.3;
+
+    // The variable to store our instance of the TensorFlow Object Detection processor.
+    private TfodProcessor tfod;
+
+    // The variable to store our instance of the vision portal.
+    private VisionPortal visionPortal;
+
 
 
 
@@ -50,6 +65,24 @@ public class RobotHardware
         OpModeReference = opModeReference;
     }
 
+    private void initTfod() {
+
+        // Create the TensorFlow processor by using a builder.
+        tfod = new TfodProcessor.Builder().build();
+
+        // Create the vision portal by using a builder.
+        VisionPortal.Builder builder = new VisionPortal.Builder();
+        builder.setCamera(WEBCAM1);
+        builder.enableLiveView(true);
+        builder.setAutoStopLiveView(false);
+
+        // Set and enable the processor.
+        builder.addProcessor(tfod);
+
+        // Build the Vision Portal, using the above settings.
+        visionPortal = builder.build();
+
+    }
     public void Initialize() {
         FL = OpModeReference.hardwareMap.get(DcMotorEx.class, "FL");
         BL = OpModeReference.hardwareMap.get(DcMotorEx.class, "BL");
@@ -58,6 +91,7 @@ public class RobotHardware
         ARM = OpModeReference.hardwareMap.get(DcMotorEx.class, "ARM");
         INTAKELIFT = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKELIFT");
         INTAKESPIN = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKESPIN");
+        WEBCAM1 = OpModeReference.hardwareMap.get(WebcamName.class, "Webcam 1");
 
         // USUALLY WE DON"T PROGRAM AROUND HARDWARE PROBLEMS BUT FL IS REVERSED POLARITY
         FL.setDirection(DcMotorEx.Direction.REVERSE);
@@ -75,7 +109,22 @@ public class RobotHardware
         BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
+        initTfod();
+
     }
+
+    public boolean IsPixel() {
+        List<Recognition> currentRecognitions = tfod.getRecognitions();
+
+        if (currentRecognitions.size() > 0)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
 
 
