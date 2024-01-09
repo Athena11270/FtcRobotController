@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
@@ -26,6 +27,7 @@ public class RobotHardware
     private DcMotorEx FR = null;
     private DcMotorEx BR = null;
 
+    private Servo ReleaseServo = null;
     // ARM1 needs a rev expansion hub
     private DcMotorEx ARM = null;
     private DcMotorEx INTAKESPIN = null;
@@ -93,7 +95,7 @@ public class RobotHardware
         INTAKESPIN = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKESPIN");
         WEBCAM1 = OpModeReference.hardwareMap.get(WebcamName.class, "Webcam 1");
 
-        // USUALLY WE DON"T PROGRAM AROUND HARDWARE PROBLEMS BUT FL IS REVERSED POLARITY
+
         FL.setDirection(DcMotorEx.Direction.REVERSE);
         BL.setDirection(DcMotorEx.Direction.REVERSE);
         FR.setDirection(DcMotorEx.Direction.FORWARD);
@@ -279,6 +281,13 @@ public class RobotHardware
         double normalSpeed = 0.4;
         double maxBoostSpeed = 1 - normalSpeed;
 
+        //beginning of pixel release servo
+        /*
+        if(OpModeReference.gamepad1.square) {
+            ReleaseServo.setPosition(1);
+        }
+        */
+
         // speed will increase based on how hard the trigger is pressed
         // determine if trigger has been pressed at all
         triggerPressed = OpModeReference.gamepad1.right_trigger > 0;
@@ -288,9 +297,9 @@ public class RobotHardware
         {
             double rightTrigger = OpModeReference.gamepad1.right_trigger;
 
-            TurboBoost = normalSpeed  + rightTrigger * maxBoostSpeed ;
+            TurboBoost = normalSpeed  + (rightTrigger * maxBoostSpeed) ;
             //OpModeReference.gamepad1.rumble(0.1,0.1,1); //SOME OPTIONAL CHANGES: Varible acelleration with RT, Rumble, Rumble based on RT
-            OpModeReference.gamepad1.rumble(1,1,100);
+            OpModeReference.gamepad1.rumble(.5,.5,100);
         }else
         {
             TurboBoost = normalSpeed;
