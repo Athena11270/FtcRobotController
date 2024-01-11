@@ -32,9 +32,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name="LowerIntake", group="Robot")
+@Autonomous(name="NEW_VISION_AUTO_TEST", group="Robot")
 
-public class LowerIntake extends LinearOpMode {
+public class VisionAutoTest1 extends LinearOpMode {
 
 
     public void runOpMode() {
@@ -47,7 +47,32 @@ public class LowerIntake extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        //robot.TimedIntakeLiftControl(1000);
+        if (robot.IsPixel())
+        {
+            //in position one
+            telemetry.addData("position","1");
+            robot.DumpPixel();
+        }
+        else
+        {
+            robot.StrafeRightCM(0.3,45.4);
+            if (robot.IsPixel())
+            {
+                //in position three
+                telemetry.addData("position","3");
+                robot.DumpPixel();
+            }
+            else
+            {
+                //in position 2
+                telemetry.addData("position","2");
+                // drive back to position 2
+                // dump pixel
+            }
+
+        }
+        telemetry.update();
+        sleep(5000);
 
 
     }

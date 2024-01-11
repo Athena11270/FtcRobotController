@@ -1,11 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
-import android.print.PrinterInfo;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -14,7 +10,6 @@ import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
-import java.util.Timer;
 
 public class RobotHardware
 {
@@ -31,7 +26,7 @@ public class RobotHardware
     // ARM1 needs a rev expansion hub
     private DcMotorEx ARM = null;
     private DcMotorEx INTAKESPIN = null;
-    private DcMotorEx INTAKELIFT = null;
+    //private DcMotorEx INTAKELIFT = null;
 
     private WebcamName WEBCAM1 = null;
 
@@ -91,9 +86,10 @@ public class RobotHardware
         FR = OpModeReference.hardwareMap.get(DcMotorEx.class, "FR");
         BR = OpModeReference.hardwareMap.get(DcMotorEx.class, "BR");
         ARM = OpModeReference.hardwareMap.get(DcMotorEx.class, "ARM");
-        INTAKELIFT = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKELIFT");
+        //INTAKELIFT = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKELIFT");
         INTAKESPIN = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKESPIN");
         WEBCAM1 = OpModeReference.hardwareMap.get(WebcamName.class, "Webcam 1");
+        ReleaseServo = OpModeReference.hardwareMap.get(Servo.class, "DUMPER");
 
 
         FL.setDirection(DcMotorEx.Direction.REVERSE);
@@ -275,18 +271,13 @@ public class RobotHardware
     }
 
 
+
+
     public void RunMecanumDrive() {
         double max;
 
         double normalSpeed = 0.4;
         double maxBoostSpeed = 1 - normalSpeed;
-
-        //beginning of pixel release servo
-        /*
-        if(OpModeReference.gamepad1.square) {
-            ReleaseServo.setPosition(1);
-        }
-        */
 
         // speed will increase based on how hard the trigger is pressed
         // determine if trigger has been pressed at all
@@ -374,6 +365,23 @@ public class RobotHardware
         }
     }
 
+    public void DumpPixel() {
+        ReleaseServo.setPosition(1);
+        OpModeReference.sleep(1000);
+        ReleaseServo.setPosition(0);
+    }
+
+    public void Dumper() {
+        //beginning of pixel release servo
+//        if (OpModeReference.gamepad1.square) {
+//            ReleaseServo.setPosition(1);
+//        } else {
+//            ReleaseServo.setPosition(0);
+//        }
+        if (OpModeReference.gamepad1.square) {
+            DumpPixel();
+        }
+    }
     public void TimedLeftMoterStop(long Time) {
 
 
@@ -385,32 +393,32 @@ public class RobotHardware
 
         FL.setPower(0);
     }
-    public void IntakeLiftControl() {
-        if (OpModeReference.gamepad2.triangle) {
-            INTAKELIFT.setPower(.6);
-        }
-        else if (OpModeReference.gamepad2.square) {
-            INTAKELIFT.setPower(-.6);
-        }
-        else {
-            INTAKELIFT.setPower(0);
-        }
-    }
+//    public void IntakeLiftControl() {
+//        if (OpModeReference.gamepad2.triangle) {
+//            INTAKELIFT.setPower(.6);
+//        }
+//        else if (OpModeReference.gamepad2.square) {
+//            INTAKELIFT.setPower(-.6);
+//        }
+//        else {
+//            INTAKELIFT.setPower(0);
+//        }
+//    }
 
-    public void TimedIntakeLiftControl(long Time) {
-        INTAKELIFT.setPower(.6);
-
-      try {
-          Thread.sleep(Time);
-            }
-              catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-
-        INTAKELIFT.setPower(0);
-
-    }
+//    public void TimedIntakeLiftControl(long Time) {
+//        INTAKELIFT.setPower(.6);
+//
+//      try {
+//          Thread.sleep(Time);
+//            }
+//              catch (InterruptedException e)
+//            {
+//                e.printStackTrace();
+//            }
+//
+//        INTAKELIFT.setPower(0);
+//
+//    }
 
 
     public void IntakeSpinControl() {

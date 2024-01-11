@@ -29,12 +29,8 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 /*
  * This file contains an example of a Linear "OpMode".
@@ -86,9 +82,10 @@ public class MecanumDrive extends LinearOpMode
         while (opModeIsActive()) {
 
             robot.RunMecanumDrive();
-            robot.IntakeLiftControl();
+            //robot.IntakeLiftControl();
             robot.IntakeSpinControl();
             robot.ArmControl();
+            robot.Dumper();
 
         }
     }

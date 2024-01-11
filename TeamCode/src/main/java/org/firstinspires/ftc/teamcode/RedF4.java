@@ -50,7 +50,7 @@ public class RedF4 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        robot.TimedIntakeLiftControl(1000);
+        //robot.TimedIntakeLiftControl(1000);
 
         //robot.TimedLeftMoterStop(3000);
 

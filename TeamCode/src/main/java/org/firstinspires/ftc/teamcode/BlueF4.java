@@ -47,7 +47,7 @@ public class BlueF4 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        robot.TimedIntakeLiftControl(1000);
+       // robot.TimedIntakeLiftControl(1000);
 
         // strafe right 108.68 cm
         robot.StrafeLeftCM(0.3,108.68);
