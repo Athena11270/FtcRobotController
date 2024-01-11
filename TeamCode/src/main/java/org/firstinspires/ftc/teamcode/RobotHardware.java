@@ -112,15 +112,21 @@ public class RobotHardware
     }
 
     public boolean IsPixel() {
-        List<Recognition> currentRecognitions = tfod.getRecognitions();
+        List<Recognition> currentRecognitions = null;
+        boolean found = false;
 
-        if (currentRecognitions.size() > 0)
-        {
-            return true;
+        for (int x = 0; x < 100; x ++) {
+            currentRecognitions = tfod.getRecognitions();
+            OpModeReference.sleep(100);
+            if (currentRecognitions.size() > 0)
+            {
+                found = true;
+                break;
+            }
+            OpModeReference.telemetry.addData("loop", x);
         }
-        else{
-            return false;
-        }
+        return found;
+
     }
 
 

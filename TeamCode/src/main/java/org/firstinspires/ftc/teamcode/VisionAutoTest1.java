@@ -47,6 +47,8 @@ public class VisionAutoTest1 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
+        // DRIVE TO THE POSITION 1
+
         if (robot.IsPixel())
         {
             //in position one
@@ -67,12 +69,15 @@ public class VisionAutoTest1 extends LinearOpMode {
                 //in position 2
                 telemetry.addData("position","2");
                 // drive back to position 2
-                // dump pixel
+                robot.StrafeLeftCM(0.3,22.7);
+                robot.DumpPixel();
             }
 
         }
         telemetry.update();
-        sleep(5000);
+        sleep(2000);
+
+        // PARK
 
 
     }
