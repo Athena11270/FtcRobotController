@@ -23,10 +23,13 @@ public class RobotHardware
     private DcMotorEx BR = null;
 
     private Servo ReleaseServo = null;
+    private Servo CLAW = null;
+
+
     // ARM1 needs a rev expansion hub
     private DcMotorEx ARM = null;
     private DcMotorEx INTAKESPIN = null;
-    //private DcMotorEx INTAKELIFT = null;
+    private DcMotorEx INTAKELIFT = null;
 
     private WebcamName WEBCAM1 = null;
 
@@ -86,10 +89,11 @@ public class RobotHardware
         FR = OpModeReference.hardwareMap.get(DcMotorEx.class, "FR");
         BR = OpModeReference.hardwareMap.get(DcMotorEx.class, "BR");
         ARM = OpModeReference.hardwareMap.get(DcMotorEx.class, "ARM");
-        //INTAKELIFT = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKELIFT");
+        INTAKELIFT = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKELIFT");
         INTAKESPIN = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKESPIN");
         WEBCAM1 = OpModeReference.hardwareMap.get(WebcamName.class, "Webcam 1");
         ReleaseServo = OpModeReference.hardwareMap.get(Servo.class, "DUMPER");
+        CLAW = OpModeReference.hardwareMap.get(Servo.class, "CLAW");
 
 
         FL.setDirection(DcMotorEx.Direction.REVERSE);
@@ -304,16 +308,16 @@ public class RobotHardware
 
         // to swap main stick from left to right (or right to left)
         // press dpad right
-        if (OpModeReference.gamepad1.dpad_right)
-        {
-          if (MainStickLeft){
-            MainStickLeft = false;
-          }
-          else if(!MainStickLeft)
-          {
-              MainStickLeft = true;
-          }
-        }
+//        if (OpModeReference.gamepad1.dpad_right)
+//        {
+//          if (MainStickLeft){
+//            MainStickLeft = false;
+//          }
+//          else if(!MainStickLeft)
+//          {
+//              MainStickLeft = true;
+//          }
+//        }
 
 
         if (MainStickLeft)
@@ -378,38 +382,42 @@ public class RobotHardware
     }
 
     public void Dumper() {
-        //beginning of pixel release servo
-//        if (OpModeReference.gamepad1.square) {
-//            ReleaseServo.setPosition(1);
-//        } else {
-//            ReleaseServo.setPosition(0);
-//        }
+        // pixel release servo
         if (OpModeReference.gamepad1.square) {
             DumpPixel();
         }
     }
-    public void TimedLeftMoterStop(long Time) {
 
-
+    public void Grabber() {
+                if (OpModeReference.gamepad1.dpad_down) {
+            CLAW.setPosition(1);
+        } else {
+            CLAW.setPosition(0);
+        }
+    }
+    // *** What does this do? ***
+    // *** Looks like it stops ONE of the wheels after a pause. WHY??? ***
+   /* public void TimedLeftMoterStop(long Time) {
         try {
             Thread.sleep(Time);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         FL.setPower(0);
     }
-//    public void IntakeLiftControl() {
-//        if (OpModeReference.gamepad2.triangle) {
-//            INTAKELIFT.setPower(.6);
-//        }
-//        else if (OpModeReference.gamepad2.square) {
-//            INTAKELIFT.setPower(-.6);
-//        }
-//        else {
-//            INTAKELIFT.setPower(0);
-//        }
-//    }
+
+    */
+    public void IntakeLiftControl() {
+        if (OpModeReference.gamepad2.triangle) {
+            INTAKELIFT.setPower(.6);
+        }
+        else if (OpModeReference.gamepad2.square) {
+            INTAKELIFT.setPower(-.6);
+        }
+        else {
+            INTAKELIFT.setPower(0);
+        }
+    }
 
 //    public void TimedIntakeLiftControl(long Time) {
 //        INTAKELIFT.setPower(.6);
