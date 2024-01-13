@@ -48,11 +48,14 @@ public class VisionAutoTest1 extends LinearOpMode {
         waitForStart();
 
         // DRIVE TO THE POSITION 1
+        robot.DriveCM(0.3,-7);
+        robot.StrafeLeftCM(0.3,15);
 
         if (robot.IsPixel())
         {
             //in position one
             telemetry.addData("position","1");
+            robot.DriveCM(0.3,-23.5);
             robot.DumpPixel();
         }
         else
@@ -70,14 +73,17 @@ public class VisionAutoTest1 extends LinearOpMode {
                 telemetry.addData("position","2");
                 // drive back to position 2
                 robot.StrafeLeftCM(0.3,22.7);
+                robot.DriveCM(0.3,-61.5);
                 robot.DumpPixel();
+                sleep(500);
+                // park
+                robot.DriveCM(0.3,61.5);
+                robot.StrafeLeftCM(0.3,122);
             }
 
         }
         telemetry.update();
-        sleep(2000);
-
-        // PARK
+        sleep(1000);
 
 
     }

@@ -49,6 +49,7 @@ public class RobotHardware
 
     private boolean triggerPressed;
     private boolean MainStickLeft = true;
+    private boolean clawClosed = false;
 
     double DiameterCM = 9.6;
     double CircumferenceCM = DiameterCM * Math.PI;
@@ -121,7 +122,7 @@ public class RobotHardware
 
         for (int x = 0; x < 100; x ++) {
             currentRecognitions = tfod.getRecognitions();
-            OpModeReference.sleep(100);
+            OpModeReference.sleep(10);
             if (currentRecognitions.size() > 0)
             {
                 found = true;
@@ -390,10 +391,10 @@ public class RobotHardware
     }
 
     public void Grabber() {
-        if (OpModeReference.gamepad1.dpad_down)
+        if (OpModeReference.gamepad2.dpad_down)
         {
-            CLAW.setPosition(1);
-        } else //if (!OpModeReference.gamepad1.dpad_down)
+            CLAW.setPosition(0.5);
+        } else //if (!OpModeReference.gamepad2.dpad_down)
         {
             CLAW.setPosition(0);
         }
@@ -440,7 +441,7 @@ public class RobotHardware
 
     public void IntakeSpinControl() {
         if (OpModeReference.gamepad2.left_bumper) {
-            INTAKESPIN.setPower(1);
+            INTAKESPIN.setPower(0.85);
         }
         else if (OpModeReference.gamepad2.right_bumper) {
             INTAKESPIN.setPower(-.8);
