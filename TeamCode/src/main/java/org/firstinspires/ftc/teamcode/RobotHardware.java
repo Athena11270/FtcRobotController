@@ -300,7 +300,7 @@ public class RobotHardware
 
             TurboBoost = normalSpeed  + (rightTrigger * maxBoostSpeed) ;
             //OpModeReference.gamepad1.rumble(0.1,0.1,1); //SOME OPTIONAL CHANGES: Varible acelleration with RT, Rumble, Rumble based on RT
-            OpModeReference.gamepad1.rumble(.5,.5,100);
+            OpModeReference.gamepad1.rumble(.1,.1,100);
         }else
         {
             TurboBoost = normalSpeed;
@@ -353,6 +353,7 @@ public class RobotHardware
         }
 
 
+
         // Send calculated power to wheels
         FL.setPower(leftFrontPower);
         FR.setPower(rightFrontPower);
@@ -389,9 +390,11 @@ public class RobotHardware
     }
 
     public void Grabber() {
-                if (OpModeReference.gamepad1.dpad_down) {
+        if (OpModeReference.gamepad1.dpad_down)
+        {
             CLAW.setPosition(1);
-        } else {
+        } else //if (!OpModeReference.gamepad1.dpad_down)
+        {
             CLAW.setPosition(0);
         }
     }
@@ -409,10 +412,10 @@ public class RobotHardware
     */
     public void IntakeLiftControl() {
         if (OpModeReference.gamepad2.triangle) {
-            INTAKELIFT.setPower(.6);
+            INTAKELIFT.setPower(.3);
         }
         else if (OpModeReference.gamepad2.square) {
-            INTAKELIFT.setPower(-.6);
+            INTAKELIFT.setPower(-.3 );
         }
         else {
             INTAKELIFT.setPower(0);
@@ -437,7 +440,7 @@ public class RobotHardware
 
     public void IntakeSpinControl() {
         if (OpModeReference.gamepad2.left_bumper) {
-            INTAKESPIN.setPower(.5);
+            INTAKESPIN.setPower(1);
         }
         else if (OpModeReference.gamepad2.right_bumper) {
             INTAKESPIN.setPower(-.8);
