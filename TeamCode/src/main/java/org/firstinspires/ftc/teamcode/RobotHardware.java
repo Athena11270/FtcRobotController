@@ -441,7 +441,7 @@ public class RobotHardware
 
     public void IntakeSpinControl() {
         if (OpModeReference.gamepad2.left_bumper) {
-            INTAKESPIN.setPower(0.85);
+            INTAKESPIN.setPower(0.5);
         }
         else if (OpModeReference.gamepad2.right_bumper) {
             INTAKESPIN.setPower(-.8);

@@ -72,8 +72,8 @@ public class VisionAutoTest1 extends LinearOpMode {
                 //in position 2
                 telemetry.addData("position","2");
                 // drive back to position 2
-                robot.StrafeLeftCM(0.3,22.7);
-                robot.DriveCM(0.3,-61.5);
+                robot.StrafeLeftCM(0.3,27.7);
+                robot.DriveCM(0.3,-56.5);
                 robot.DumpPixel();
                 sleep(500);
                 // park
