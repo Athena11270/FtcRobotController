@@ -27,10 +27,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package FTCnew;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+import org.firstinspires.ftc.teamcode.RobotHardware;
 
 /*
  * This file contains an example of a Linear "OpMode".
@@ -60,9 +62,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="MECANUM_DRIVE", group="Linear OpMode")
+@TeleOp(name="MECANUM_DRIVE_NEW", group="Linear OpMode")
 
-public class MecanumDrive extends LinearOpMode
+public class DriveNew extends LinearOpMode
 {
 
     // Declare OpMode members for each of the 4 motors.
@@ -84,7 +86,7 @@ public class MecanumDrive extends LinearOpMode
             robot.RunMecanumDrive();
             robot.IntakeLiftControl();
             robot.IntakeSpinControl();
-            robot.ArmControl();
+            robot.ArmControlNew();
             robot.Dumper();
             robot.Grabber();
 

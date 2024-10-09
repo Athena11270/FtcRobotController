@@ -362,14 +362,14 @@ public class RobotHardwareNew
         BR.setPower(rightBackPower);
     }
 
-    public void ArmControl() {
+    public void ArmControlNew() {
 
-        // press cross to make arm go up
-        // press circle to make arm go down
-        if (OpModeReference.gamepad2.cross) {
+        // press right trigger to make arm go up
+        // press left trigger to make arm go down
+        if (OpModeReference.gamepad2.right_trigger>0) {
             ARM.setPower(0.4);
         }
-        else if (OpModeReference.gamepad2.circle) {
+        else if (OpModeReference.gamepad2.left_trigger>0) {
             ARM.setPower(-0.4);
         }
         else {

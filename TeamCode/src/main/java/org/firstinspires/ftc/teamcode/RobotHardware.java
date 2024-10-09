@@ -289,7 +289,18 @@ public class RobotHardware
 
         double normalSpeed = 0.4;
         double maxBoostSpeed = 1 - normalSpeed;
+        double slowSpeed = 0.2;
 
+        //slow button
+        boolean LeftTriggerPressed = OpModeReference.gamepad1.left_trigger > 0;
+        if (LeftTriggerPressed)
+        {
+
+            boolean leftTrigger = OpModeReference.gamepad1.left_trigger > 0;
+
+           TurboBoost = leftTrigger * maxBoostSpeed;
+
+        }
         // speed will increase based on how hard the trigger is pressed
         // determine if trigger has been pressed at all
         triggerPressed = OpModeReference.gamepad1.right_trigger > 0;
@@ -451,6 +462,16 @@ public class RobotHardware
         }
     }
 
+    public void ArmControlNew() {
+        if (OpModeReference.gamepad2.right_trigger>0) {
+            ARM.setPower(0.9);
+        }
+        else if (OpModeReference.gamepad2.left_trigger>0) {
+            ARM.setPower(-0.4);
+        }
+        else {
+            ARM.setPower(0);}
+    }
 
 
 //    public class TestTensorFlow1 extends LinearOpMode {
