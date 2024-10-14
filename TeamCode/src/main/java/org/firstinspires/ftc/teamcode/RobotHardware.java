@@ -292,13 +292,13 @@ public class RobotHardware
         double slowSpeed = 0.2;
 
         //slow button
-        boolean LeftTriggerPressed = OpModeReference.gamepad1.left_trigger > 0;
-        if (LeftTriggerPressed)
-        {
-
-            boolean leftTrigger = OpModeReference.gamepad1.left_trigger > 0;
-
-           TurboBoost = leftTrigger * maxBoostSpeed;
+//        boolean LeftTriggerPressed = OpModeReference.gamepad1.left_trigger > 0;
+//        if (LeftTriggerPressed)
+//        {
+//
+//            boolean leftTrigger = OpModeReference.gamepad1.left_trigger > 0;
+//
+//           //TurboBoost = leftTrigger * maxBoostSpeed;
 
         }
         // speed will increase based on how hard the trigger is pressed
@@ -311,8 +311,7 @@ public class RobotHardware
             double rightTrigger = OpModeReference.gamepad1.right_trigger;
 
             TurboBoost = normalSpeed  + (rightTrigger * maxBoostSpeed) ;
-            //OpModeReference.gamepad1.rumble(0.1,0.1,1); //SOME OPTIONAL CHANGES: Varible acelleration with RT, Rumble, Rumble based on RT
-            OpModeReference.gamepad1.rumble(.1,.1,100);
+
         }else
         {
             TurboBoost = normalSpeed;
