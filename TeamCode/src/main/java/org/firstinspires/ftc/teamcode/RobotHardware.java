@@ -467,7 +467,7 @@ public class RobotHardware
             ARM.setPower(0.9);
         }
         else if (OpModeReference.gamepad2.left_trigger>0) {
-            ARM.setPower(-0.4);
+            ARM.setPower(-0.1);
         }
         else {
             ARM.setPower(0);}
