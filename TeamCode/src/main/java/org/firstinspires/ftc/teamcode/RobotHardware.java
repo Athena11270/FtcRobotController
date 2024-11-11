@@ -292,13 +292,10 @@ public class RobotHardware
         double slowSpeed = 0.2;
 
         //slow button
-//        boolean LeftTriggerPressed = OpModeReference.gamepad1.left_trigger > 0;
-//        if (LeftTriggerPressed)
-//        {
-//
-//            boolean leftTrigger = OpModeReference.gamepad1.left_trigger > 0;
-//
-//           //TurboBoost = leftTrigger * maxBoostSpeed;
+        boolean LeftTriggerPressed = OpModeReference.gamepad1.left_trigger > 0;
+        if (LeftTriggerPressed)
+        {
+            TurboBoost = slowSpeed;
 
         }
         // speed will increase based on how hard the trigger is pressed
