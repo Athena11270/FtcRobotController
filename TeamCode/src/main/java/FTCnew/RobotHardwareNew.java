@@ -300,7 +300,6 @@ public class RobotHardwareNew
             OpModeReference.gamepad1.rumble(.1,.1,100);
 
         }
-        // speed will increase based on how hard the trigger is pressed
         // determine if trigger has been pressed at all
         triggerPressed = OpModeReference.gamepad1.right_trigger > 0;
 
