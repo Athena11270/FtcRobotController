@@ -31,7 +31,7 @@ public class RobotHardwareNew
     private DcMotorEx INTAKESPIN = null;
     private DcMotorEx INTAKELIFT = null;
 
-    private WebcamName WEBCAM1 = null;
+    //private WebcamName WEBCAM1 = null;
 
     public double TurboBoost = 0.3;
 
@@ -73,7 +73,7 @@ public class RobotHardwareNew
 
         // Create the vision portal by using a builder.
         VisionPortal.Builder builder = new VisionPortal.Builder();
-        builder.setCamera(WEBCAM1);
+        //builder.setCamera(WEBCAM1);
         builder.enableLiveView(true);
         builder.setAutoStopLiveView(false);
 
