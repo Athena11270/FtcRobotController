@@ -90,11 +90,11 @@ public class RobotHardwareNew
         FR = OpModeReference.hardwareMap.get(DcMotorEx.class, "FR");
         BR = OpModeReference.hardwareMap.get(DcMotorEx.class, "BR");
         ARM = OpModeReference.hardwareMap.get(DcMotorEx.class, "ARM");
-        INTAKELIFT = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKELIFT");
-        INTAKESPIN = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKESPIN");
-        WEBCAM1 = OpModeReference.hardwareMap.get(WebcamName.class, "Webcam 1");
-        ReleaseServo = OpModeReference.hardwareMap.get(Servo.class, "DUMPER");
-        CLAW = OpModeReference.hardwareMap.get(Servo.class, "CLAW");
+        //INTAKELIFT = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKELIFT");
+        //INTAKESPIN = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKESPIN");
+        //WEBCAM1 = OpModeReference.hardwareMap.get(WebcamName.class, "Webcam 1");
+        //ReleaseServo = OpModeReference.hardwareMap.get(Servo.class, "DUMPER");
+        //CLAW = OpModeReference.hardwareMap.get(Servo.class, "CLAW");
 
 
         FL.setDirection(DcMotorEx.Direction.REVERSE);
