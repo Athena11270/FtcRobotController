@@ -73,7 +73,7 @@ public class DriveNew extends LinearOpMode
     @Override
     public void runOpMode() {
 
-        RobotHardware robot = new RobotHardware(this);
+        RobotHardwareNew robot = new RobotHardwareNew(this);
 
         robot.Initialize();
 
@@ -83,7 +83,7 @@ public class DriveNew extends LinearOpMode
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            robot.RunMecanumDrive();
+            robot.RunMecanumDriveNew();
             //robot.IntakeLiftControl();
             //robot.IntakeSpinControl();
             //robot.ArmControlNew();

@@ -27,6 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -41,27 +42,33 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
+*/
 /*
  * This OpMode illustrates the basics of TensorFlow Object Detection, using
  * the easiest way.
  *
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
- */
+ *//*
+
 @TeleOp(name = "Concept: TensorFlow Object Detection Easy", group = "Concept")
 //@Disabled
 public class TestTensorFlowEasy1 extends LinearOpMode {
 
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
 
-    /**
+    */
+/**
      * The variable to store our instance of the TensorFlow Object Detection processor.
-     */
+     *//*
+
     private TfodProcessor tfod;
 
-    /**
+    */
+/**
      * The variable to store our instance of the vision portal.
-     */
+     *//*
+
     private VisionPortal visionPortal;
 
     @Override
@@ -100,9 +107,11 @@ public class TestTensorFlowEasy1 extends LinearOpMode {
 
     }   // end runOpMode()
 
-    /**
+    */
+/**
      * Initialize the TensorFlow Object Detection processor.
-     */
+     *//*
+
     private void initTfod() {
 
         // Create the TensorFlow processor the easy way.
@@ -119,9 +128,11 @@ public class TestTensorFlowEasy1 extends LinearOpMode {
 
     }   // end method initTfod()
 
-    /**
+    */
+/**
      * Add telemetry about TensorFlow Object Detection (TFOD) recognitions.
-     */
+     *//*
+
     private void telemetryTfod() {
 
         List<Recognition> currentRecognitions = tfod.getRecognitions();
@@ -141,3 +152,4 @@ public class TestTensorFlowEasy1 extends LinearOpMode {
     }   // end method telemetryTfod()
 
 }   // end class
+*/

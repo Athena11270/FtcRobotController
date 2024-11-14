@@ -27,19 +27,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package FTCnew;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name="NEW_VISION_AUTO_TEST", group="Robot")
+import org.firstinspires.ftc.teamcode.RobotHardware;
 
-public class VisionAutoTest1 extends LinearOpMode {
+@Autonomous(name="AutoDriveTest", group="Robot")
+
+public class AutoDriveTest extends LinearOpMode {
 
 
     public void runOpMode() {
 
-        RobotHardware robot = new RobotHardware(this);
+        RobotHardwareNew robot = new RobotHardwareNew(this);
 
         robot.Initialize();
 
@@ -47,45 +49,14 @@ public class VisionAutoTest1 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        // DRIVE TO THE POSITION 1
-        robot.DriveCM(0.3,-7);
-        robot.StrafeLeftCM(0.3,15);
+        //robot.TimedIntakeLiftControl(1000);
 
-        if (robot.IsPixel())
-        {
-            //in position one
-            telemetry.addData("position","1");
-            robot.DriveCM(0.3,-23.5);
-            robot.DumpPixel();
-        }
-        else
-        {
-            robot.StrafeRightCM(0.3,45.4);
-            if (robot.IsPixel())
-            {
-                //in position three
-                telemetry.addData("position","3");
-                robot.DumpPixel();
-            }
-            else
-            {
-                //in position 2
-                telemetry.addData("position","2");
-                // drive back to position 2
-                robot.StrafeLeftCM(0.3,27.7);
-                robot.DriveCM(0.3,-56.5);
-                robot.DumpPixel();
-                sleep(500);
-                // park
-                robot.DriveCM(0.3,61.5);
-                robot.StrafeLeftCM(0.3,122);
-            }
-
-        }
-        telemetry.update();
-        sleep(1000);
+        // drive forword 100 cm
+        robot.DriveCM(0.3, 100.0);
 
 
+        //move left 50 cm
+        robot.StrafeRightCM(0.5,50);
     }
 
 

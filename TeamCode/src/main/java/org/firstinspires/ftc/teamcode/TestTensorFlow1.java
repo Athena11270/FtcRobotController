@@ -27,6 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -41,13 +42,15 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
+*/
 /*
  * This OpMode illustrates the basics of TensorFlow Object Detection,
  * including Java Builder structures for specifying Vision parameters.
  *
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
- */
+ *//*
+
 @TeleOp(name = "NOT_EASY_TENSORFLOW_1", group = "Concept")
 
 public class TestTensorFlow1 extends LinearOpMode {
@@ -88,9 +91,11 @@ public class TestTensorFlow1 extends LinearOpMode {
 
     }   // end runOpMode()
 
-    /**
+    */
+/**
      * Initialize the TensorFlow Object Detection processor.
-     */
+     *//*
+
     private void initTfod() {
 
         // Create the TensorFlow processor by using a builder.
@@ -131,3 +136,4 @@ public class TestTensorFlow1 extends LinearOpMode {
     }   // end method telemetryTfod()
 
 }   // end class
+*/

@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
 //import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+//import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
@@ -36,10 +36,10 @@ public class RobotHardwareNew
     public double TurboBoost = 0.3;
 
     // The variable to store our instance of the TensorFlow Object Detection processor.
-    private TfodProcessor tfod;
+    //private TfodProcessor tfod;
 
     // The variable to store our instance of the vision portal.
-    private VisionPortal visionPortal;
+    //private VisionPortal visionPortal;
 
 
 
@@ -69,19 +69,19 @@ public class RobotHardwareNew
     private void initTfod() {
 
         // Create the TensorFlow processor by using a builder.
-        tfod = new TfodProcessor.Builder().build();
+        //tfod = new TfodProcessor.Builder().build();
 
         // Create the vision portal by using a builder.
-        VisionPortal.Builder builder = new VisionPortal.Builder();
+        //VisionPortal.Builder builder = new VisionPortal.Builder();
         //builder.setCamera(WEBCAM1);
-        builder.enableLiveView(true);
-        builder.setAutoStopLiveView(false);
+        //builder.enableLiveView(true);
+        //builder.setAutoStopLiveView(false);
 
         // Set and enable the processor.
-        builder.addProcessor(tfod);
+        //builder.addProcessor(tfod);
 
         // Build the Vision Portal, using the above settings.
-        visionPortal = builder.build();
+        //visionPortal = builder.build();
 
     }
     public void Initialize() {
@@ -112,11 +112,11 @@ public class RobotHardwareNew
         BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
-        initTfod();
+        //initTfod();
 
     }
 
-    public boolean IsPixel() {
+   /* public boolean IsPixel() {
         List<Recognition> currentRecognitions = null;
         boolean found = false;
 
@@ -133,7 +133,7 @@ public class RobotHardwareNew
         return found;
 
     }
-
+*/
 
 
 
@@ -284,22 +284,24 @@ public class RobotHardwareNew
 
 
 
-    public void RunMecanumDrive() {
+    public void RunMecanumDriveNew() {
         double max;
 
         double normalSpeed = 0.4;
         double maxBoostSpeed = 1 - normalSpeed;
         double slowSpeed = 0.2;
 
-        //slow button
+        //slow button (does not work right now)
         boolean LeftTriggerPressed = OpModeReference.gamepad1.left_trigger > 0;
-        if (LeftTriggerPressed)
-        {
-            TurboBoost = slowSpeed;
+        if (LeftTriggerPressed) {
+            TurboBoost = slowSpeed - (OpModeReference.gamepad1.left_trigger * slowSpeed);
 
-            OpModeReference.gamepad1.rumble(.1,.1,100);
+            OpModeReference.gamepad1.rumble(.1, .1, 100);
 
+        } else {
+            TurboBoost = normalSpeed;
         }
+
         // determine if trigger has been pressed at all
         triggerPressed = OpModeReference.gamepad1.right_trigger > 0;
 
