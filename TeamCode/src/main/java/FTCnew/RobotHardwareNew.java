@@ -283,6 +283,57 @@ public class RobotHardwareNew
 
 
 
+    public void TurnRight(double power, double cm)
+    {
+        // calculate number of ticks we want to move
+        double targetTicks = TicksPerCM * cm;
+
+        // reset encoders to zero
+        FR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+
+        // set our target ticks
+        FR.setTargetPosition((int)Math.round(-targetTicks));
+        BR.setTargetPosition((int)Math.round(-targetTicks));
+        FL.setTargetPosition((int)Math.round(-targetTicks));
+        BL.setTargetPosition((int)Math.round(-targetTicks));
+
+        // set motor mode to run to position
+        FR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BR.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        FL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        BL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+
+        // turn motors on
+        FR.setPower(power);
+        BR.setPower(power);
+        FL.setPower(power);
+        BL.setPower(power);
+
+        // wait while motors go to where they need to
+        while (FR.isBusy() || BR.isBusy() || FL.isBusy() || BL.isBusy()) {
+            // do nothing
+        }
+
+        // stop motors
+        FR.setPower(0);
+        BR.setPower(0);
+        FL.setPower(0);
+        BL.setPower(0);
+
+        // set mode back to normal
+        FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+
+    }
+
+
+
+
 
     public void RunMecanumDriveNew() {
         double max;
