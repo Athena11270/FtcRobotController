@@ -55,18 +55,6 @@ public class AutoDriveTest extends LinearOpMode {
         robot.DriveCM(0.3, 100.0);
 
 
-        //move left 50 cm
-        robot.StrafeRightCM(0.5,50);
-
-        //turn right 180
-        robot.TurnRight(0.5, 118);
-
-        //move left 50 cm
-        robot.StrafeLeftCM(0.5,50);
-
-        //turn right 90
-        robot.TurnRight(0.5, 59);
-
 
     }
 

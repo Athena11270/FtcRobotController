@@ -41,7 +41,7 @@ public class AutoTestOne extends LinearOpMode {
 
     public void runOpMode() {
 
-        RobotHardware robot = new RobotHardware(this);
+        RobotHardwareNew robot = new RobotHardwareNew(this);
 
         robot.Initialize();
 
@@ -52,7 +52,7 @@ public class AutoTestOne extends LinearOpMode {
         //robot.TimedIntakeLiftControl(1000);
 
         // drive forword 121.92 cm
-        robot.DriveCM(0.3, 121.92);
+        robot.DriveCM(0.3, 77);
 
         //hang specimen
 
@@ -60,14 +60,14 @@ public class AutoTestOne extends LinearOpMode {
         robot.DriveCM(0.3, -12.00);
 
         //drive left 121.92 cm
-        robot.StrafeLeftCM(0.3, 121.92);
+        robot.StrafeLeftCM(0.3, 160);
 
         //pickup sample
 
-        //turn right 180 degrees
+        robot.TurnRight(0.5,118);
 
         //drive forward 60.96 cm
-        robot.DriveCM(0.3, 60.96);
+        robot.DriveCM(0.3, 35.96);
 
         //put sample in box
 
