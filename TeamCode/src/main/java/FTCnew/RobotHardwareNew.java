@@ -488,18 +488,26 @@ public class RobotHardwareNew
         }
     }
 
-    public void DumpPixel() {
-        ReleaseServo.setPosition(1);
-        OpModeReference.sleep(1000);
-        ReleaseServo.setPosition(0);
-    }
-
-    public void Dumper() {
-        // pixel release servo
-        if (OpModeReference.gamepad1.square) {
-            DumpPixel();
+    public void OpenClaw() {
+        while (OpModeReference.gamepad2.dpad_down) {
+            ReleaseServo.setPosition(1);
         }
     }
+
+    public void CloseClaw() {
+        while (OpModeReference.gamepad2.dpad_up) {
+            ReleaseServo.setPosition(0);
+
+        }
+    }
+
+
+   /* public void Pincer() {
+        // pixel release servo
+        if (OpModeReference.gamepad1.square) {
+            OpenClaw();
+        }
+    }*/
 
     public void Grabber() {
         if (OpModeReference.gamepad2.dpad_down)

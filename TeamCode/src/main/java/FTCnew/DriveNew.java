@@ -84,6 +84,8 @@ public class DriveNew extends LinearOpMode
         while (opModeIsActive()) {
 
             robot.RunMecanumDriveNew();
+            robot.OpenClaw();
+            robot.CloseClaw();
             //robot.IntakeLiftControl();
             //robot.IntakeSpinControl();
             //robot.ArmControlNew();

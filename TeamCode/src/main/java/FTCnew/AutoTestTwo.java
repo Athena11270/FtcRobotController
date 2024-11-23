@@ -41,7 +41,7 @@ public class AutoTestTwo extends LinearOpMode {
 
     public void runOpMode() {
 
-        RobotHardware robot = new RobotHardware(this);
+        RobotHardwareNew robot = new RobotHardwareNew(this);
 
         robot.Initialize();
 
@@ -57,6 +57,7 @@ public class AutoTestTwo extends LinearOpMode {
         //put sample in basket
 
         //turn right 90 degrees
+        robot.TurnRight(0.5,59);
 
         // drive forword 45.72 cm
         robot.DriveCM(0.3, 45.72);
@@ -64,6 +65,7 @@ public class AutoTestTwo extends LinearOpMode {
         //pickup sample
 
         //turn right 180 degrees
+        robot.TurnRight(0.5,118);
 
         //drive forward 45.72 cm
         robot.DriveCM(0.3, 45.72);
