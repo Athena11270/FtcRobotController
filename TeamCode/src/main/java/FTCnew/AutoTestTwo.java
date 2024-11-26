@@ -51,15 +51,23 @@ public class AutoTestTwo extends LinearOpMode {
 
         //robot.TimedIntakeLiftControl(1000);
 
+        //move right 10
+        robot.StrafeRightCM(0.3,10);
+
         // drive forword 30 cm
         robot.DriveCM(0.3, 30.00);
+
+        //move back left 10
+        robot.StrafeLeftCM(0.3,10);
 
         //put sample in basket
 
         //turn right 90 degrees
         robot.TurnRight(0.5,59);
 
-        // drive forword 45.72 cm
+        //move left 20 cm
+        robot.StrafeLeftCM(0.3,20);
+                // drive forword 45.72 cm
         robot.DriveCM(0.3, 45.72);
 
         //pickup sample
@@ -67,13 +75,14 @@ public class AutoTestTwo extends LinearOpMode {
         //turn right 180 degrees
         robot.TurnRight(0.5,118);
 
+
         //drive forward 45.72 cm
         robot.DriveCM(0.3, 45.72);
 
         //put sample in box
 
-        // strafe right 182.88 cm
-        robot.StrafeLeftCM(0.3,182.88);
+        // strafe right 150 cm
+        robot.StrafeLeftCM(0.3,150);
 
 
     }
