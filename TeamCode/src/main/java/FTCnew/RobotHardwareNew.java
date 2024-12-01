@@ -2,6 +2,7 @@ package FTCnew;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 //import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -383,6 +384,37 @@ public class RobotHardwareNew
 
     }
 
+    public void MoveArm(double power, double cm)
+    // 30 gets it all the way down and back up (maybe 35 with stronger motor)
+    {
+        // calculate number of ticks we want to move
+        double targetTicks = TicksPerCM * cm;
+
+        // reset encoders to zero
+        ARM.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+
+        // set our target ticks
+        ARM.setTargetPosition((int)Math.round(targetTicks));
+
+        // set motor mode to run to position
+        ARM.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+
+        // turn motors on
+        ARM.setPower(power);
+
+        // wait while motors go to where they need to
+        while (ARM.isBusy()) {
+            // do nothing
+        }
+
+        // stop motors
+        ARM.setPower(0);
+
+        // set mode back to normal
+        ARM.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+
+    }
+
 
 
     public void RunMecanumDriveNew() {
@@ -475,12 +507,12 @@ public class RobotHardwareNew
 
     public void ArmControlNew() {
 
-        // press right trigger to make arm go up
-        // press left trigger to make arm go down
-        if (OpModeReference.gamepad2.right_trigger>0) {
+        // press cross to make arm go up
+        // press circle to make arm go down
+        if (OpModeReference.gamepad2.left_trigger > 0) {
             ARM.setPower(0.4);
         }
-        else if (OpModeReference.gamepad2.left_trigger>0) {
+        else if (OpModeReference.gamepad2.right_trigger > 0) {
             ARM.setPower(-0.4);
         }
         else {
@@ -488,19 +520,22 @@ public class RobotHardwareNew
         }
     }
 
-    public void OpenClaw() {
-        while (OpModeReference.gamepad2.dpad_down) {
-            ReleaseServo.setPosition(1);
+
+        /*double OpenClaw;
+        {
+            while (OpModeReference.gamepad2.dpad_down) {
+                ReleaseServo.setPosition(1);
+            }
         }
-    }
 
-    public void CloseClaw() {
-        while (OpModeReference.gamepad2.dpad_up) {
-            ReleaseServo.setPosition(0);
+        double CloseClaw;
+        {
+            while (OpModeReference.gamepad2.dpad_up) {
+                ReleaseServo.setPosition(0);
 
+            }
         }
-    }
-
+*/
 
    /* public void Pincer() {
         // pixel release servo
@@ -509,17 +544,17 @@ public class RobotHardwareNew
         }
     }*/
 
-    public void Grabber() {
-        if (OpModeReference.gamepad2.dpad_down)
+       /* double Grabber;
         {
-            CLAW.setPosition(0.5);
-        } else //if (!OpModeReference.gamepad2.dpad_down)
-        {
-            CLAW.setPosition(0);
-        }
-    }
-    // *** What does this do? ***
-    // *** Looks like it stops ONE of the wheels after a pause. WHY??? ***
+            if (OpModeReference.gamepad2.dpad_down) {
+                CLAW.setPosition(0.5);
+            } else //if (!OpModeReference.gamepad2.dpad_down)
+            {
+                CLAW.setPosition(0);
+            }
+        }*/
+        // *** What does this do? ***
+        // *** Looks like it stops ONE of the wheels after a pause. WHY??? ***
    /* public void TimedLeftMoterStop(long Time) {
         try {
             Thread.sleep(Time);
@@ -530,18 +565,17 @@ public class RobotHardwareNew
     }
 
     */
-    public void IntakeLiftControl() {
-        if (OpModeReference.gamepad2.triangle) {
-            INTAKELIFT.setPower(.3);
+       /* double IntakeLiftControl;
+        {
+            if (OpModeReference.gamepad2.triangle) {
+                INTAKELIFT.setPower(.3);
+            } else if (OpModeReference.gamepad2.square) {
+                INTAKELIFT.setPower(-.3);
+            } else {
+                INTAKELIFT.setPower(0);
+            }
         }
-        else if (OpModeReference.gamepad2.square) {
-            INTAKELIFT.setPower(-.3 );
-        }
-        else {
-            INTAKELIFT.setPower(0);
-        }
-    }
-
+*/
 //    public void TimedIntakeLiftControl(long Time) {
 //        INTAKELIFT.setPower(.6);
 //
@@ -558,18 +592,16 @@ public class RobotHardwareNew
 //    }
 
 
-    public void IntakeSpinControl() {
-        if (OpModeReference.gamepad2.left_bumper) {
-            INTAKESPIN.setPower(0.5);
+        /*double IntakeSpinControl;
+        {
+            if (OpModeReference.gamepad2.left_bumper) {
+                INTAKESPIN.setPower(0.5);
+            } else if (OpModeReference.gamepad2.right_bumper) {
+                INTAKESPIN.setPower(-.8);
+            } else {
+                INTAKESPIN.setPower(0);
+            }*/
         }
-        else if (OpModeReference.gamepad2.right_bumper) {
-            INTAKESPIN.setPower(-.8);
-        }
-        else {
-            INTAKESPIN.setPower(0);
-        }
-    }
-
 
 
 //    public class TestTensorFlow1 extends LinearOpMode {
@@ -720,4 +752,4 @@ public class RobotHardwareNew
 
 //    }   // end class
 
-}
+
