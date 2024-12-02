@@ -29,6 +29,7 @@ public class RobotHardwareNew
 
     // ARM1 needs a rev expansion hub
     private DcMotorEx ARM = null;
+    private DcMotorEx SLIDE = null;
     private DcMotorEx INTAKESPIN = null;
     private DcMotorEx INTAKELIFT = null;
 
@@ -509,18 +510,31 @@ public class RobotHardwareNew
 
     public void ArmControlNew() {
 
-        // press cross to make arm go up
-        // press circle to make arm go down
-        if (OpModeReference.gamepad2.left_trigger > 0) {
+        if (OpModeReference.gamepad2.left_stick_y > 0.3) {
             ARM.setPower(0.4);
         }
-        else if (OpModeReference.gamepad2.right_trigger > 0) {
+        else if (OpModeReference.gamepad2.left_stick_y < -0.3) {
             ARM.setPower(-0.4);
         }
         else {
             ARM.setPower(0);
         }
     }
+
+
+    public void SLIDEControlNew() {
+
+        if (OpModeReference.gamepad2.right_stick_y > 0.3) {
+            SLIDE.setPower(0.4);
+        }
+        else if (OpModeReference.gamepad2.right_stick_y < -0.3) {
+            SLIDE.setPower(-0.4);
+        }
+        else {
+            SLIDE.setPower(0);
+        }
+    }
+
 
 
         /*double OpenClaw;
