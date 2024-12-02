@@ -420,20 +420,22 @@ public class RobotHardwareNew
     public void RunMecanumDriveNew() {
         double max;
 
-        double normalSpeed = 0.4;
-        double maxBoostSpeed = 1 - normalSpeed;
-        double slowSpeed = 0.2;
 
-        //slow button (does not work right now)
+        double normalSpeed = 0.4;
+        double maxBoostSpeed = 1 - normalSpeed; // Maximum boost speed
+        double slowSpeed = 0.2 - normalSpeed; // Slow speed when left trigger is pressed
+
+// Slow button logic (left trigger)
         if (OpModeReference.gamepad1.left_trigger > 0) {
 
-            TurboBoost = slowSpeed;
+            TurboBoost = normalSpeed + (OpModeReference.gamepad1.left_trigger * slowSpeed);  // Slow down the robot
 
-            OpModeReference.gamepad1.rumble(1, .1, 100);
-
+            OpModeReference.gamepad1.rumble(1, 0.1, 100);  // Trigger rumble effect
         } else {
-            TurboBoost = normalSpeed;
+            TurboBoost = normalSpeed;  // Set normal speed
         }
+
+
 
         // determine if trigger has been pressed at all
         triggerPressed = OpModeReference.gamepad1.right_trigger > 0;
