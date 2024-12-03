@@ -537,7 +537,7 @@ public class RobotHardwareNew
 
 
 
-        double OpenClaw;
+     /*   double OpenClaw;
         {
             while (OpModeReference.gamepad2.dpad_down) {
                 ReleaseServo.setPosition(1);
@@ -551,7 +551,7 @@ public class RobotHardwareNew
 
             }
         }
-
+*/
 
    /* public void Pincer() {
         // pixel release servo
