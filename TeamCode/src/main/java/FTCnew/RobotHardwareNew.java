@@ -536,12 +536,17 @@ public class RobotHardwareNew
         }
     }
 
+    public void Claw() {
+
         if (OpModeReference.gamepad2.left_bumper) {
-            ReleaseServo.setPosition (1);
+            ReleaseServo.setPosition(1);
         }
-        if (OpModeReference.gamepad2.) {
+
+        if (OpModeReference.gamepad2.right_bumper) {
             ReleaseServo.setPosition (0);
         }
+    }
+
 
 
         //double OpenClaw;
