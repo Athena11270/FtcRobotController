@@ -92,6 +92,7 @@ public class RobotHardwareNew
         FR = OpModeReference.hardwareMap.get(DcMotorEx.class, "FR");
         BR = OpModeReference.hardwareMap.get(DcMotorEx.class, "BR");
         ARM = OpModeReference.hardwareMap.get(DcMotorEx.class, "ARM");
+        SLIDE = OpModeReference.hardwareMap.get(DcMotorEx.class, "SLIDE");
         //INTAKELIFT = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKELIFT");
         //INTAKESPIN = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKESPIN");
         //WEBCAM1 = OpModeReference.hardwareMap.get(WebcamName.class, "Webcam 1");
@@ -100,7 +101,7 @@ public class RobotHardwareNew
 
 
         FL.setDirection(DcMotorEx.Direction.REVERSE);
-        BL.setDirection(DcMotorEx.Direction.REVERSE);
+        BL.setDirection(DcMotorEx.Direction.FORWARD);
         FR.setDirection(DcMotorEx.Direction.FORWARD);
         BR.setDirection(DcMotorEx.Direction.FORWARD);
 
@@ -535,23 +536,34 @@ public class RobotHardwareNew
         }
     }
 
-
-
-     /*   double OpenClaw;
-        {
-            while (OpModeReference.gamepad2.dpad_down) {
-                ReleaseServo.setPosition(1);
-            }
+        if (OpModeReference.gamepad2.left_bumper) {
+            ReleaseServo.setPosition (1);
+        }
+        if (OpModeReference.gamepad2.) {
+            ReleaseServo.setPosition (0);
         }
 
-        double CloseClaw;
-        {
-            while (OpModeReference.gamepad2.dpad_up) {
-                ReleaseServo.setPosition(0);
 
-            }
-        }
-*/
+        //double OpenClaw;
+      //  {
+      //      while (OpModeReference.gamepad2.dpad_down) {
+       //         ReleaseServo.setPosition(1);
+       //     }
+       // }
+
+       // double CloseClaw;
+       // {
+         //   while (OpModeReference.gamepad2.dpad_up) {
+       //         ReleaseServo.setPosition(0);
+
+       //     }
+       // }
+
+
+
+
+
+
 
    /* public void Pincer() {
         // pixel release servo
