@@ -99,7 +99,7 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
         FR.setDirection(DcMotor.Direction.FORWARD);
         BR.setDirection(DcMotor.Direction.FORWARD);
 
-        // Wait for the game to start (driver presses PLAY)
+        // Wait for the game to start (driver presses START)
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
