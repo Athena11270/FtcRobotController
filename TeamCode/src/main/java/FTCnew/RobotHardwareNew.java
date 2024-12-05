@@ -96,9 +96,11 @@ public class RobotHardwareNew
         //INTAKELIFT = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKELIFT");
         //INTAKESPIN = OpModeReference.hardwareMap.get(DcMotorEx.class, "INTAKESPIN");
         //WEBCAM1 = OpModeReference.hardwareMap.get(WebcamName.class, "Webcam 1");
-        //ReleaseServo = OpModeReference.hardwareMap.get(Servo.class, "DUMPER");
+        ReleaseServo = OpModeReference.hardwareMap.get(Servo.class, "ReleaseServo");
         //CLAW = OpModeReference.hardwareMap.get(Servo.class, "CLAW");
 
+        // set initial position
+        ReleaseServo.setPosition(0.5);
 
         FL.setDirection(DcMotorEx.Direction.REVERSE);
         BL.setDirection(DcMotorEx.Direction.FORWARD);
@@ -433,24 +435,14 @@ public class RobotHardwareNew
             TurboBoost = normalSpeed + (OpModeReference.gamepad1.left_trigger * slowSpeed);  // Slow down the robot
 
             OpModeReference.gamepad1.rumble(1, 0.1, 100);  // Trigger rumble effect
-        } else {
-            TurboBoost = normalSpeed;  // Set normal speed
         }
-
-
-
-        // determine if trigger has been pressed at all
-        triggerPressed = OpModeReference.gamepad1.right_trigger > 0;
-
-        // output of right trigger is (we think) in the range of 0..1
-        if (triggerPressed)
-        {
+        else if (OpModeReference.gamepad1.right_trigger > 0) {
 
             TurboBoost = normalSpeed  + (OpModeReference.gamepad1.right_trigger * maxBoostSpeed) ;
             //OpModeReference.gamepad1.rumble(0.1,0.1,1); //SOME OPTIONAL CHANGES: Varible acelleration with RT, Rumble, Rumble based on RT
             OpModeReference.gamepad1.rumble(.1,1,100);
-        }else
-        {
+        }
+        else {
             TurboBoost = normalSpeed;
         }
 
@@ -542,7 +534,7 @@ public class RobotHardwareNew
             ReleaseServo.setPosition(1);
         }
 
-        if (OpModeReference.gamepad2.right_bumper) {
+        else if (OpModeReference.gamepad2.right_bumper) {
             ReleaseServo.setPosition (0);
         }
     }
