@@ -51,6 +51,6 @@ public class AutoPark extends LinearOpMode {
         //robot.TimedIntakeLiftControl(1000);
 
         // drive forword 121.92 cm
-        robot.DriveCM(0.3, 77);
+        robot.StrafeRightCM(0.3, 30);
 
     }}
