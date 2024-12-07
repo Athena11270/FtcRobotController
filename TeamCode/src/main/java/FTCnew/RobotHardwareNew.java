@@ -531,14 +531,14 @@ public class RobotHardwareNew
         if (OpModeReference.gamepad2.right_stick_y < -0.3 && CurrentPosition < 20 * SlidePPRPerDistance ) {
             //1,425.1 PPR
             //SLIDE.setTargetPosition((int)(5 * SlidePPRPerDistance));
-            SLIDE.setPower(0.3);
+            SLIDE.setPower(0.6);
             OpModeReference.telemetry.addData("direction", "up");
             OpModeReference.telemetry.update();
         }
         else if (OpModeReference.gamepad2.right_stick_y > 0.3 && CurrentPosition > 0) {
             //1,425.1 PPR
             //SLIDE.setTargetPosition((int)(-5 * SlidePPRPerDistance));
-            SLIDE.setPower(-0.3);
+            SLIDE.setPower(-0.6);
             OpModeReference.telemetry.addData("direction", "down");
             OpModeReference.telemetry.update();
         }
