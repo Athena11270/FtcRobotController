@@ -117,7 +117,9 @@ public class RobotHardwareNew
         FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        SLIDE.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        SLIDE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        SLIDE.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+
         SLIDE.setPower(0);
 
 
@@ -519,22 +521,30 @@ public class RobotHardwareNew
         }
     }
 
+    private double SlidePPR = 1425.1;
+    private double SlidePulley = 1.49 * Math.PI;
+    private double SlidePPRPerDistance = SlidePPR / SlidePulley;
 
     public void SLIDEControlNew() {
-
-        if (OpModeReference.gamepad2.right_stick_y < -0.3) {
-            SLIDE.setPower(0.8);
-            OpModeReference.telemetry.addData("first", "first");
+        int CurrentPosition = SLIDE.getCurrentPosition();
+        OpModeReference.telemetry.addData("Position", CurrentPosition);
+        if (OpModeReference.gamepad2.right_stick_y < -0.3 && CurrentPosition < 20 * SlidePPRPerDistance ) {
+            //1,425.1 PPR
+            //SLIDE.setTargetPosition((int)(5 * SlidePPRPerDistance));
+            SLIDE.setPower(0.3);
+            OpModeReference.telemetry.addData("direction", "up");
             OpModeReference.telemetry.update();
         }
-        else if (OpModeReference.gamepad2.right_stick_y > 0.3) {
-            SLIDE.setPower(-0.8);
-            OpModeReference.telemetry.addData("second", "second");
+        else if (OpModeReference.gamepad2.right_stick_y > 0.3 && CurrentPosition > 0) {
+            //1,425.1 PPR
+            //SLIDE.setTargetPosition((int)(-5 * SlidePPRPerDistance));
+            SLIDE.setPower(-0.3);
+            OpModeReference.telemetry.addData("direction", "down");
             OpModeReference.telemetry.update();
         }
         else {
             SLIDE.setPower(0);
-            OpModeReference.telemetry.addData("third", "third");
+            OpModeReference.telemetry.addData("direction", "stopped");
             OpModeReference.telemetry.update();
         }
     }
