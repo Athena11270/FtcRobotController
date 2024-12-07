@@ -32,8 +32,6 @@ package FTCnew;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.RobotHardware;
-
 /*
  * This file contains an example of a Linear "OpMode".
  * An OpMode is a 'program' that runs in either the autonomous or the teleop period of an FTC match.
@@ -84,6 +82,7 @@ public class DriveNew extends LinearOpMode
         while (opModeIsActive()) {
 
             robot.RunMecanumDriveNew();
+            robot.SLIDEControlNew();
             robot.Claw();
             //robot.OpenClaw();
             //robot.CloseClaw();

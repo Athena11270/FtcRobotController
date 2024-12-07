@@ -32,7 +32,6 @@ package FTCnew;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.RobotHardware;
 
 @Autonomous(name="AutoTestTwo", group="Robot")
 

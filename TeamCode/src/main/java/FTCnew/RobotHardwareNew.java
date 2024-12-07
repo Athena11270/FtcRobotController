@@ -1,16 +1,15 @@
 package FTCnew;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 //import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 //import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-import org.firstinspires.ftc.vision.VisionPortal;
-import org.firstinspires.ftc.vision.tfod.TfodProcessor;
+//import org.firstinspires.ftc.vision.VisionPortal;
+//import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-import java.util.List;
 
 public class RobotHardwareNew
 {
@@ -106,16 +105,22 @@ public class RobotHardwareNew
         BL.setDirection(DcMotorEx.Direction.FORWARD);
         FR.setDirection(DcMotorEx.Direction.FORWARD);
         BR.setDirection(DcMotorEx.Direction.FORWARD);
+        SLIDE.setDirection(DcMotorEx.Direction.FORWARD);
 
         FL.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         FR.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         BL.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         BR.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        SLIDE.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
         FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        SLIDE.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        SLIDE.setPower(0);
+
+
 
         //initTfod();
 
@@ -517,25 +522,31 @@ public class RobotHardwareNew
 
     public void SLIDEControlNew() {
 
-        if (OpModeReference.gamepad2.right_stick_y > 0.3) {
-            SLIDE.setPower(0.4);
+        if (OpModeReference.gamepad2.right_stick_y < -0.3) {
+            SLIDE.setPower(0.8);
+            OpModeReference.telemetry.addData("first", "first");
+            OpModeReference.telemetry.update();
         }
-        else if (OpModeReference.gamepad2.right_stick_y < -0.3) {
-            SLIDE.setPower(-0.4);
+        else if (OpModeReference.gamepad2.right_stick_y > 0.3) {
+            SLIDE.setPower(-0.8);
+            OpModeReference.telemetry.addData("second", "second");
+            OpModeReference.telemetry.update();
         }
         else {
             SLIDE.setPower(0);
+            OpModeReference.telemetry.addData("third", "third");
+            OpModeReference.telemetry.update();
         }
     }
 
     public void Claw() {
 
         if (OpModeReference.gamepad2.left_bumper) {
-            ReleaseServo.setPosition(1);
+            ReleaseServo.setPosition(0.95);
         }
 
         else if (OpModeReference.gamepad2.right_bumper) {
-            ReleaseServo.setPosition (0);
+            ReleaseServo.setPosition (0.05);
         }
     }
 
