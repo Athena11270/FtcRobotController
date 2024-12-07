@@ -542,11 +542,11 @@ public class RobotHardwareNew
     public void Claw() {
 
         if (OpModeReference.gamepad2.left_bumper) {
-            ReleaseServo.setPosition(0.95);
+            ReleaseServo.setPosition(0.55);
         }
 
         else if (OpModeReference.gamepad2.right_bumper) {
-            ReleaseServo.setPosition (0.05);
+            ReleaseServo.setPosition (0);
         }
     }
 
