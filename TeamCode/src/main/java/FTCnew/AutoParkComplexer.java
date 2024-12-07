@@ -33,9 +33,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 
-@Autonomous(name="AutoPark", group="Robot")
+@Autonomous(name="AutoParkComplexer", group="Robot")
 
-public class AutoPark extends LinearOpMode {
+public class AutoParkComplexer extends LinearOpMode {
 
 
     public void runOpMode() {
@@ -51,6 +51,10 @@ public class AutoPark extends LinearOpMode {
         //robot.TimedIntakeLiftControl(1000);
 
         // drive right 30 cm
-        robot.StrafeRightCM(0.3, 50);
+        robot.DriveCM(0.3, 50);
+
+        robot.StrafeRightCM(0.3,170);
+
+        robot.DriveCM(0.3,-75);
 
     }}
