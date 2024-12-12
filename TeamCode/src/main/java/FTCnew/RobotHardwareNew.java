@@ -22,7 +22,7 @@ public class RobotHardwareNew
     private DcMotorEx FR = null;
     private DcMotorEx BR = null;
 
-    private Servo ReleaseServo = null;
+    public Servo ReleaseServo = null;
     private Servo CLAW = null;
 
 
@@ -426,6 +426,37 @@ public class RobotHardwareNew
 
     }
 
+    public void MoveSlide(double power, double cm)
+    // 30 gets it all the way down and back up (maybe 35 with stronger motor)
+    {
+        // calculate number of ticks we want to move
+        double targetTicks = TicksPerCM * cm;
+
+        // reset encoders to zero
+        SLIDE.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+
+        // set our target ticks
+        SLIDE.setTargetPosition((int)Math.round(targetTicks));
+
+        // set motor mode to run to position
+        SLIDE.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+
+        // turn motors on
+        SLIDE.setPower(power);
+
+        // wait while motors go to where they need to
+        while (SLIDE.isBusy()) {
+            // do nothing
+        }
+
+        // stop motors
+        SLIDE.setPower(0);
+
+        // set mode back to normal
+        SLIDE.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+
+    }
+
 
 
     public void RunMecanumDriveNew() {
@@ -524,6 +555,7 @@ public class RobotHardwareNew
     private double SlidePPR = 1425.1;
     private double SlidePulley = 1.49 * Math.PI;
     private double SlidePPRPerDistance = SlidePPR / SlidePulley;
+    //Need to push
 
     public void SLIDEControlNew() {
         int CurrentPosition = SLIDE.getCurrentPosition();
@@ -558,6 +590,16 @@ public class RobotHardwareNew
         else if (OpModeReference.gamepad2.right_bumper) {
             ReleaseServo.setPosition (0);
         }
+    }
+
+    public void AutoClawOpen() {
+
+            ReleaseServo.setPosition(0.55);
+    }
+
+    public void AutoClawClose() {
+
+        ReleaseServo.setPosition(0);
     }
 
 

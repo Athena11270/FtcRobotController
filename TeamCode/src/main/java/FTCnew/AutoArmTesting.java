@@ -29,14 +29,15 @@
 
 package FTCnew;
 
+import android.graphics.RenderNode;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 
+@Autonomous(name="AutoArmTesting", group="Robot")
 
-@Autonomous(name="AutoTestOne", group="Robot")
-
-public class AutoTestOne extends LinearOpMode {
+public class AutoArmTesting extends LinearOpMode {
 
 
     public void runOpMode() {
@@ -51,38 +52,12 @@ public class AutoTestOne extends LinearOpMode {
 
         //robot.TimedIntakeLiftControl(1000);
 
-        // drive forward 121.92 cm
-        robot.DriveCM(0.3, 77);
+        robot.SLIDEControlNew();
 
-        //Lift arm (centemeters may be wrong)
-        robot.MoveArm(0.4,20);
-
-        //slide out (centemeters may be wrong)
-        robot.MoveSlide(0.6,20);
-
-        //Move arm down (centemeters may be wrong)
-        robot.MoveArm(0.4,-10);
-
-        //slide in (centemeters may be wrong)
-        robot.MoveSlide(0.6,-10);
-
-        //open claw
         robot.AutoClawOpen();
 
-        // drive backwards 12.00 cm
-        robot.DriveCM(0.3, -12.00);
+        robot.AutoClawClose();
 
-        //drive left 121.92 cm
-        robot.StrafeLeftCM(0.3, 160);
-
-        //pickup sample
-
-        robot.TurnRight(0.5,118);
-
-        //drive forward 60.96 cm
-        robot.DriveCM(0.3, 35.96);
-
-        //put sample in box
 
 
     }}

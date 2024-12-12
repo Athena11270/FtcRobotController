@@ -49,12 +49,7 @@ public class ArmMoveArmTest extends LinearOpMode {
 
         //robot.TimedIntakeLiftControl(1000);
 
-        //move arm 30
-        //
-        //
-        // robot.MoveArm(0.5,30);
 
-        //move arm 30
         robot.MoveArm(0.5,-30);
 
 
