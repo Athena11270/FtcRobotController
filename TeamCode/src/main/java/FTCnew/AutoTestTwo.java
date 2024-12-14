@@ -66,7 +66,8 @@ public class AutoTestTwo extends LinearOpMode {
 
         //move left 20 cm
         robot.StrafeLeftCM(0.3,20);
-                // drive forword 45.72 cm
+
+        // drive forword 45.72 cm
         robot.DriveCM(0.3, 45.72);
 
         //pickup sample

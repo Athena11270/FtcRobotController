@@ -99,7 +99,7 @@ public class RobotHardwareNew
         //CLAW = OpModeReference.hardwareMap.get(Servo.class, "CLAW");
 
         // set initial position
-        ReleaseServo.setPosition(0.5);
+        //ReleaseServo.setPosition(0.5);
 
         FL.setDirection(DcMotorEx.Direction.REVERSE);
         BL.setDirection(DcMotorEx.Direction.FORWARD);
@@ -594,12 +594,17 @@ public class RobotHardwareNew
 
     public void AutoClawOpen() {
 
-            ReleaseServo.setPosition(0.55);
+        ReleaseServo.setPosition(0);
+        OpModeReference.telemetry.addData("Claw", "Open");
+        OpModeReference.telemetry.update();
     }
+
 
     public void AutoClawClose() {
 
-        ReleaseServo.setPosition(0);
+        ReleaseServo.setPosition(0.55);
+        OpModeReference.telemetry.addData("Claw", "Closed");
+        OpModeReference.telemetry.update();
     }
 
 

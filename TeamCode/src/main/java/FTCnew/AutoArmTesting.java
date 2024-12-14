@@ -50,14 +50,17 @@ public class AutoArmTesting extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        //robot.TimedIntakeLiftControl(1000);
 
-        robot.SLIDEControlNew();
+        //robot.SLIDEControlNew();
 
         robot.AutoClawOpen();
 
+        this.sleep(2000);
+
         robot.AutoClawClose();
 
+        //robot.AutoClawClose();
 
+        this.sleep(2000);
 
     }}
