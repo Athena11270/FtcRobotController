@@ -542,10 +542,10 @@ public class RobotHardwareNew
     public void ArmControlNew() {
 
         if (OpModeReference.gamepad2.left_stick_y > 0.3) {
-            ARM.setPower(0.4);
+            ARM.setPower(-0.4);
         }
         else if (OpModeReference.gamepad2.left_stick_y < -0.3) {
-            ARM.setPower(-0.4);
+            ARM.setPower(0.4);
         }
         else {
             ARM.setPower(0);
@@ -560,17 +560,18 @@ public class RobotHardwareNew
     public void SLIDEControlNew() {
         int CurrentPosition = SLIDE.getCurrentPosition();
         OpModeReference.telemetry.addData("Position", CurrentPosition);
-        if (OpModeReference.gamepad2.right_stick_y < -0.3 && CurrentPosition < 20 * SlidePPRPerDistance ) {
+        if (OpModeReference.gamepad2.right_stick_y < -0.3 && CurrentPosition < 16 * SlidePPRPerDistance ) {
             //1,425.1 PPR
             //SLIDE.setTargetPosition((int)(5 * SlidePPRPerDistance));
-            SLIDE.setPower(0.6);
+            //20 was preveouse number
+            SLIDE.setPower(0.9);
             OpModeReference.telemetry.addData("direction", "up");
             OpModeReference.telemetry.update();
         }
         else if (OpModeReference.gamepad2.right_stick_y > 0.3 && CurrentPosition > 0) {
             //1,425.1 PPR
             //SLIDE.setTargetPosition((int)(-5 * SlidePPRPerDistance));
-            SLIDE.setPower(-0.6);
+            SLIDE.setPower(-0.9);
             OpModeReference.telemetry.addData("direction", "down");
             OpModeReference.telemetry.update();
         }
