@@ -61,6 +61,8 @@ public class AutoTestTwo extends LinearOpMode {
 
         //put sample in basket
 
+        robot.MoveArm(0.3,0.4);
+
         //turn right 90 degrees
         robot.TurnRight(0.5,59);
 

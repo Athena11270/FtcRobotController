@@ -560,7 +560,7 @@ public class RobotHardwareNew
     public void SLIDEControlNew() {
         int CurrentPosition = SLIDE.getCurrentPosition();
         OpModeReference.telemetry.addData("Position", CurrentPosition);
-        if (OpModeReference.gamepad2.right_stick_y < -0.3 && CurrentPosition < 16 * SlidePPRPerDistance ) {
+        if (OpModeReference.gamepad2.right_stick_y < -0.3 && CurrentPosition < 17 * SlidePPRPerDistance ) {
             //1,425.1 PPR
             //SLIDE.setTargetPosition((int)(5 * SlidePPRPerDistance));
             //20 was preveouse number
@@ -584,11 +584,11 @@ public class RobotHardwareNew
 
     public void Claw() {
 
-        if (OpModeReference.gamepad2.left_bumper) {
+        if (OpModeReference.gamepad2.right_bumper) {
             ReleaseServo.setPosition(0.55);
         }
 
-        else if (OpModeReference.gamepad2.right_bumper) {
+        else if (OpModeReference.gamepad2.left_bumper) {
             ReleaseServo.setPosition (0);
         }
     }
@@ -845,5 +845,16 @@ public class RobotHardwareNew
 //        }   // end method telemetryTfod()
 
 //    }   // end class
+
+
+
+
+
+
+
+
+
+
+
 
 
