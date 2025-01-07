@@ -3,6 +3,7 @@ package FTCnew;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 //import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -106,12 +107,14 @@ public class RobotHardwareNew
         FR.setDirection(DcMotorEx.Direction.FORWARD);
         BR.setDirection(DcMotorEx.Direction.FORWARD);
         SLIDE.setDirection(DcMotorEx.Direction.FORWARD);
+        ARM.setDirection(DcMotorEx.Direction.FORWARD);
 
         FL.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         FR.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         BL.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         BR.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         SLIDE.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        ARM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
@@ -119,6 +122,8 @@ public class RobotHardwareNew
         BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         SLIDE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         SLIDE.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        ARM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        ARM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         SLIDE.setPower(0);
 
@@ -539,18 +544,33 @@ public class RobotHardwareNew
         BR.setPower(rightBackPower);
     }
 
+    private double ArmPPR = 5281.1;
+
     public void ArmControlNew() {
 
-        if (OpModeReference.gamepad2.left_stick_y > 0.3) {
+        int ArmCurrentPosition = ARM.getCurrentPosition();
+        OpModeReference.telemetry.addData("Position", ArmCurrentPosition);
+        if (OpModeReference.gamepad2.left_stick_y > 0.3 && ArmCurrentPosition > 0 * ArmPPR) {
             ARM.setPower(-0.4);
         }
-        else if (OpModeReference.gamepad2.left_stick_y < -0.3) {
+        else if (OpModeReference.gamepad2.left_stick_y < -0.3 && ArmCurrentPosition < 1 * ArmPPR) {
             ARM.setPower(0.4);
         }
         else {
             ARM.setPower(0);
         }
     }
+    //public void ArmControlNew() {
+    //if (OpModeReference.gamepad2.left_stick_y > 0.3 && ) {
+        //ARM.setPower(-0.4);
+    //}
+    //else if (OpModeReference.gamepad2.left_stick_y < -0.3) {
+        //ARM.setPower(0.4);
+    //}
+    //else {
+        //ARM.setPower(0);
+    //}
+}
 
     private double SlidePPR = 1425.1;
     private double SlidePulley = 1.49 * Math.PI;
@@ -558,9 +578,9 @@ public class RobotHardwareNew
     //Need to push
 
     public void SLIDEControlNew() {
-        int CurrentPosition = SLIDE.getCurrentPosition();
-        OpModeReference.telemetry.addData("Position", CurrentPosition);
-        if (OpModeReference.gamepad2.right_stick_y < -0.3 && CurrentPosition < 17 * SlidePPRPerDistance ) {
+        int SlideCurrentPosition = SLIDE.getCurrentPosition();
+        OpModeReference.telemetry.addData("Position", SlideCurrentPosition);
+        if (OpModeReference.gamepad2.right_stick_y < -0.3 && SlideCurrentPosition < 17 * SlidePPRPerDistance ) {
             //1,425.1 PPR
             //SLIDE.setTargetPosition((int)(5 * SlidePPRPerDistance));
             //20 was preveouse number
@@ -568,7 +588,7 @@ public class RobotHardwareNew
             OpModeReference.telemetry.addData("direction", "up");
             OpModeReference.telemetry.update();
         }
-        else if (OpModeReference.gamepad2.right_stick_y > 0.3 && CurrentPosition > 0) {
+        else if (OpModeReference.gamepad2.right_stick_y > 0.3 && SlideCurrentPosition > 0) {
             //1,425.1 PPR
             //SLIDE.setTargetPosition((int)(-5 * SlidePPRPerDistance));
             SLIDE.setPower(-0.9);
