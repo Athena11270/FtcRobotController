@@ -371,7 +371,7 @@ public class RobotHardwareNew
         FL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         BL.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
 
-        // turn motors on
+        // turn motors on.
         FR.setPower(power);
         BR.setPower(power);
         FL.setPower(power);
