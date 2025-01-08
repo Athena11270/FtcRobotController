@@ -112,6 +112,7 @@ public class RobotHardwareNew
         BL.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         BR.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         SLIDE.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        ARM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
@@ -539,10 +540,12 @@ public class RobotHardwareNew
         BR.setPower(rightBackPower);
     }
 
+
+
     public void ArmControlNew() {
 
         if (OpModeReference.gamepad2.left_stick_y > 0.3) {
-            ARM.setPower(-0.4);
+            ARM.setPower(-0.6);
         }
         else if (OpModeReference.gamepad2.left_stick_y < -0.3) {
             ARM.setPower(0.4);
