@@ -120,6 +120,8 @@ public class RobotHardwareNew
         BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         SLIDE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         SLIDE.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        ARM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        ARM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         SLIDE.setPower(0);
 
@@ -465,7 +467,7 @@ public class RobotHardwareNew
 
 
         double normalSpeed = 0.4;
-        double maxBoostSpeed = 1 - normalSpeed; // Maximum boost speed
+        double maxBoostSpeed = 0.8 - normalSpeed; // Maximum boost speed
         double slowSpeed = 0.2 - normalSpeed; // Slow speed when left trigger is pressed
 
 // Slow button logic (left trigger)
@@ -541,8 +543,10 @@ public class RobotHardwareNew
     }
 
 
-
+    //private double armPPR = 5281.1;
     public void ArmControlNew() {
+
+        int armCurrentPosition = ARM.getCurrentPosition();
 
         if (OpModeReference.gamepad2.left_stick_y > 0.3) {
             ARM.setPower(-0.6);

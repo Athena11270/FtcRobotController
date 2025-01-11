@@ -32,9 +32,10 @@ package FTCnew;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name="AutoMoveArmTest", group="Robot")
 
-public class ArmMoveArmTest extends LinearOpMode {
+@Autonomous(name="AutoSpecimenPark", group="Robot")
+
+public class AutoSpecimenPark extends LinearOpMode {
 
 
     public void runOpMode() {
@@ -49,10 +50,39 @@ public class ArmMoveArmTest extends LinearOpMode {
 
         //robot.TimedIntakeLiftControl(1000);
 
+        robot.AutoClawClose();
+        this.sleep(2000);
 
-        robot.MoveArm(0.5,-30);
-        robot.AutoClawOpen();
+        //lift arm
+        robot.MoveArm(0.5,115);
 
+        // drive forword 100 cm
+        robot.DriveCM(0.3, 50.00);
+
+        //extend slide
+        robot.MoveSlide(0.5,380);
+
+        //move forward a bit
+        robot.DriveCM(0.3,6);
+
+        robot.MoveArm(0.5,-15);
+
+        robot.MoveSlide(0.5,-50);
+
+        robot.MoveArm(0.5,-40);
+
+        robot.DriveCM(0.3,-10);
+
+        robot.MoveArm(0.7,-40);
+
+        robot.MoveSlide(0.5,-25);
+
+    //place sample
+
+
+
+        //move back left 10
+        //robot.StrafeLeftCM(0.3,10);
 
 
     }
